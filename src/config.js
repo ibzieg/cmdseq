@@ -20,17 +20,67 @@ const fs = require('fs');
 
 const { safeDump } = require('js-yaml');
 
-const { Generator, generatorDefaults } = require('./generator');
+const { TrackConfig } = require('./track-config');
+const { generatorDefaults, generateSequence } = require('./generator');
 
 // -----------------------------------------------------------------------------
 
-const generator = Generator(generatorDefaults);
-
-const yaml = safeDump(generator, {
-  sortKeys: true,
-});
-
 function writeDefaultConfig() {
+  let track = {};
+  try {
+    track = TrackConfig({
+      playback: {
+        rate: 4,
+      },
+      generator: generatorDefaults,
+      sequences: [
+        {
+          name: 'intro',
+          steps: generateSequence(generatorDefaults),
+        },
+        {
+          name: 'A',
+          steps: generateSequence({ ...generatorDefaults, type: 'euclid', steps: 5 }),
+        },
+        {
+          name: 'B',
+          steps: generateSequence({ ...generatorDefaults, type: 'euclid', steps: 6 }),
+        },
+        {
+          name: 'quarter',
+          steps: generateSequence({ ...generatorDefaults, type: 'quarter' }),
+        },
+        {
+          name: 'half',
+          steps: generateSequence({ ...generatorDefaults, type: 'half' }),
+        },
+        {
+          name: 'eighth',
+          steps: generateSequence({ ...generatorDefaults, type: 'eighth' }),
+        },
+        {
+          name: 'euclid8',
+          steps: generateSequence({ ...generatorDefaults, type: 'euclid', steps: 8 }),
+        },
+        {
+          name: 'accel',
+          steps: generateSequence({ ...generatorDefaults, type: 'accel', steps: 4 }),
+        },
+        {
+          name: 'ritard',
+          steps: generateSequence({ ...generatorDefaults, type: 'ritard', steps: 4 }),
+        },
+      ],
+    });
+  } catch (error) {
+    console.log('Error generating default track:');
+    console.log(error);
+  }
+
+  const yaml = safeDump(track, {
+    flowLevel: 4,
+    // sortKeys: true,
+  });
   fs.writeFileSync('./output.yaml', yaml);
 }
 

@@ -1,5 +1,8 @@
 {
     "extends": "eslint-config-airbnb",
+    "plugins": [
+        "babel"
+    ],
     "rules": {
         "import/order": ["error", { "newlines-between": "always" }]
     }

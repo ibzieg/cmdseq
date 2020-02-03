@@ -1,0 +1,32 @@
+bpm: 120
+tracks:
+  - kick
+  - snare
+  - hat
+  - noise
+  - mono1
+  - mono2
+  - poly1
+  - poly2
+master: kick
+scenes:
+  - repeat: 4
+    actions:
+      - track kick graph 2
+      - track mono1 graph 0,1,0,2
+      - track mono1 arp false
+      -
+      - track mono2 mute on
+  - repeat: 16
+    actions:
+      - track kick graph 3
+      - track mono1 arp true
+  - repeat: 16
+    actions:
+      - track mono1 follow kick
+
+      # mono2 starts following mono1
+      - track mono2 mute off
+      - track mono2 graph a,b,a,c
+      - track mono2 follow mono1
+      - track mono2 rate 8

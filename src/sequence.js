@@ -16,10 +16,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const { isEmpty } = require('lodash');
+const { superstruct } = require('superstruct');
+const { isNull, isEmpty } = require('lodash');
 
-const isMidiValue = (value) => isEmpty(value) || (value >= 0 && value <= 127);
+const { isMidiNumber, isNoteEvent } = require('./midi-event');
+
+
+// -----------------------------------------------------------------------------
+
+const Sequence = superstruct({
+  types: {
+    midiNumber: isMidiNumber,
+    noteEvent: (value) => isNull(value) || isNoteEvent(value),
+  },
+})({
+  name: 'string',
+  steps: ['noteEvent?'],
+});
+
+const isSequence = (value) => {
+  const [error] = Sequence.validate(value);
+  return isEmpty(error);
+};
+
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
 
 module.exports = {
-  isMidiValue,
+  Sequence,
+  isSequence,
 };
