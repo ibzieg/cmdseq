@@ -17,11 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const app = require('./package.json');
-const { writeDefaultConfig } = require('./src/config');
+const { setupStore } = require('./src/config');
 
 // -----------------------------------------------------------------------------
 
 (function main() {
-  console.log(`${app.name} ${app.version}`);
-  writeDefaultConfig();
+  try {
+    console.log(`${app.name} ${app.version}`);
+    setupStore();
+  } catch (error) {
+    console.log('Unhandled Exception:');
+    console.log(error);
+  }
 }());

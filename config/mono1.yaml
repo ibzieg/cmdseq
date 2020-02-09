@@ -1,0 +1,172 @@
+playback:
+  rate: 4
+generator:
+  length: 16
+  steps: 4
+  type: quadrant
+  notes:
+    - 36
+    - 42
+    - 48
+sequences:
+  - name: introZZaa
+    steps:
+      - null
+      - {pitch: 84, velocity: 77, duration: 8n, mod1: 82, mod2: 60}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 76, duration: 8n, mod1: 61, mod2: 74}
+      - null
+      - {pitch: 36, velocity: 114, duration: 8n, mod1: 55, mod2: 31}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 78, duration: 8n, mod1: 48, mod2: 99}
+      - null
+      - null
+      - null
+  - name: A
+    steps:
+      - {pitch: 36, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
+      - null
+      - null
+      - {pitch: 36, velocity: 44, duration: 8n, mod1: 75, mod2: 88}
+      - null
+      - null
+      - {pitch: 36, velocity: 36, duration: 8n, mod1: 52, mod2: 70}
+      - null
+      - null
+      - {pitch: 48, velocity: 120, duration: 8n, mod1: 27, mod2: 73}
+      - null
+      - null
+      - {pitch: 42, velocity: 80, duration: 8n, mod1: 59, mod2: 108}
+      - null
+      - null
+      - null
+  - name: B
+    steps:
+      - {pitch: 48, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
+      - null
+      - null
+      - {pitch: 48, velocity: 110, duration: 8n, mod1: 30, mod2: 86}
+      - null
+      - {pitch: 42, velocity: 120, duration: 8n, mod1: 97, mod2: 91}
+      - null
+      - null
+      - {pitch: 48, velocity: 65, duration: 8n, mod1: 73, mod2: 56}
+      - null
+      - null
+      - {pitch: 48, velocity: 53, duration: 8n, mod1: 24, mod2: 29}
+      - null
+      - {pitch: 42, velocity: 120, duration: 8n, mod1: 110, mod2: 83}
+      - null
+      - null
+  - name: quarter
+    steps:
+      - {pitch: 36, velocity: 93, duration: 8n, mod1: 98, mod2: 112}
+      - null
+      - null
+      - null
+      - {pitch: 42, velocity: 98, duration: 8n, mod1: 29, mod2: 43}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 59, duration: 8n, mod1: 109, mod2: 23}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 126, duration: 8n, mod1: 99, mod2: 32}
+      - null
+      - null
+      - null
+  - name: half
+    steps:
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 71, duration: 8n, mod1: 86, mod2: 41}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 80, duration: 8n, mod1: 43, mod2: 43}
+      - null
+      - null
+      - null
+  - name: eighth
+    steps:
+      - null
+      - {pitch: 36, velocity: 106, duration: 8n, mod1: 94, mod2: 23}
+      - null
+      - {pitch: 36, velocity: 51, duration: 8n, mod1: 110, mod2: 20}
+      - null
+      - {pitch: 42, velocity: 32, duration: 8n, mod1: 27, mod2: 35}
+      - null
+      - {pitch: 48, velocity: 118, duration: 8n, mod1: 90, mod2: 63}
+      - null
+      - {pitch: 42, velocity: 62, duration: 8n, mod1: 41, mod2: 75}
+      - null
+      - {pitch: 36, velocity: 111, duration: 8n, mod1: 57, mod2: 27}
+      - null
+      - {pitch: 36, velocity: 93, duration: 8n, mod1: 28, mod2: 110}
+      - null
+      - {pitch: 48, velocity: 106, duration: 8n, mod1: 68, mod2: 107}
+  - name: euclid8
+    steps:
+      - {pitch: 36, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
+      - null
+      - {pitch: 36, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
+      - null
+      - {pitch: 36, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
+      - null
+      - {pitch: 36, velocity: 80, duration: 8n, mod1: 88, mod2: 26}
+      - null
+      - {pitch: 48, velocity: 30, duration: 8n, mod1: 94, mod2: 107}
+      - null
+      - {pitch: 42, velocity: 106, duration: 8n, mod1: 61, mod2: 27}
+      - null
+      - {pitch: 36, velocity: 92, duration: 8n, mod1: 111, mod2: 75}
+      - null
+      - {pitch: 42, velocity: 48, duration: 8n, mod1: 90, mod2: 50}
+      - null
+  - name: accel
+    steps:
+      - {pitch: 48, velocity: 48, duration: 8n, mod1: 87, mod2: 87}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 61, duration: 8n, mod1: 67, mod2: 17}
+      - null
+      - null
+      - {pitch: 42, velocity: 102, duration: 8n, mod1: 14, mod2: 73}
+      - null
+      - null
+      - {pitch: 36, velocity: 71, duration: 8n, mod1: 71, mod2: 106}
+      - null
+      - {pitch: 42, velocity: 46, duration: 8n, mod1: 50, mod2: 51}
+      - {pitch: 48, velocity: 68, duration: 8n, mod1: 24, mod2: 84}
+      - {pitch: 48, velocity: 100, duration: 8n, mod1: 104, mod2: 82}
+      - {pitch: 48, velocity: 121, duration: 8n, mod1: 90, mod2: 69}
+  - name: ritard
+    steps:
+      - {pitch: 42, velocity: 86, duration: 8n, mod1: 107, mod2: 102}
+      - {pitch: 48, velocity: 26, duration: 8n, mod1: 46, mod2: 65}
+      - {pitch: 42, velocity: 99, duration: 8n, mod1: 27, mod2: 66}
+      - {pitch: 36, velocity: 123, duration: 8n, mod1: 13, mod2: 86}
+      - null
+      - {pitch: 42, velocity: 46, duration: 8n, mod1: 53, mod2: 35}
+      - null
+      - null
+      - {pitch: 36, velocity: 49, duration: 8n, mod1: 79, mod2: 27}
+      - null
+      - null
+      - {pitch: 36, velocity: 83, duration: 8n, mod1: 107, mod2: 102}
+      - null
+      - null
+      - {pitch: 48, velocity: 33, duration: 8n, mod1: 71, mod2: 65}

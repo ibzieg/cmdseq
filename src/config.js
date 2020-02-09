@@ -20,6 +20,9 @@ const fs = require('fs');
 
 const { safeDump } = require('js-yaml');
 
+const store = require('./store');
+const { putTrack, removeTrack, selectFirstTrack } = require('./store/tracks');
+const StateFileWatcher = require('./state-file-watcher');
 const { TrackConfig } = require('./track-config');
 const { generatorDefaults, generateSequence } = require('./generator');
 
@@ -84,8 +87,37 @@ function writeDefaultConfig() {
   fs.writeFileSync('./output.yaml', yaml);
 }
 
+function handleStoreStateChange() {
+  const state = store.getState();
+  const firstTrack = selectFirstTrack(state);
+  console.log(firstTrack.sequences[0].name);
+}
+
+function handleTrackFileChange(trackConfig) {
+  const { dispatch } = store;
+  dispatch(putTrack(trackConfig));
+}
+
+function watchConfigFile() {
+  const configFilename = 'config/mono1.yaml';
+
+  const trackWatcher = new StateFileWatcher(
+    configFilename, {
+      schema: TrackConfig,
+      onLoad: handleTrackFileChange,
+    },
+  );
+}
+
+function setupStore() {
+  store.subscribe(handleStoreStateChange);
+  watchConfigFile();
+}
+
 // -----------------------------------------------------------------------------
 
 module.exports = {
   writeDefaultConfig,
+  watchConfigFile,
+  setupStore,
 };
