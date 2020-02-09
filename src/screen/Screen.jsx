@@ -1,0 +1,88 @@
+/*
+ * Copyright 2020, Ian Zieg
+ *
+ * This file is part of a program called "cmdseq"
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+import React, { Component } from 'react';
+import blessed from 'blessed';
+import { render } from 'react-blessed';
+
+const requireJsx = require('./require-jsx');
+
+const App = requireJsx(`${__dirname}/App.jsx`);
+
+// -----------------------------------------------------------------------------
+
+let _instance;
+
+// -----------------------------------------------------------------------------
+
+class Screen {
+  static get Instance() {
+    return _instance;
+  }
+
+  static get instance() {
+    return _instance;
+  }
+
+  static create(options) {
+    if (_instance instanceof Screen) {
+      throw new Error('Screen instance has already been created');
+    } else {
+      _instance = new Screen(options);
+    }
+  }
+
+  constructor(options) {
+    const { onExit, onCommandInput, onFunctionKey } = options;
+
+    const handleOnExit = () => {
+      if (onExit) {
+        onExit();
+      } else {
+        process.exit(0);
+      }
+    };
+
+    const screen = blessed.screen({
+      autoPadding: true,
+      dockBorders: true,
+      smartCSR: true,
+      title: 'cmdseq',
+    });
+
+    screen.key(['escape', 'q', 'C-c'], (ch, key) => {
+      handleOnExit();
+    });
+
+    this.appComponent = render(
+      <App
+        onCommandInput={onCommandInput}
+        onFunctionKey={onFunctionKey}
+        onExit={handleOnExit}
+      />, screen,
+    );
+  }
+
+  log(text) {
+    this.appComponent.addLogLine(text);
+  }
+}
+
+// -----------------------------------------------------------------------------
+
+module.exports = Screen;

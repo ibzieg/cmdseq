@@ -18,11 +18,13 @@
  */
 const colors = require('colors');
 
+const Screen = require('./screen');
+
 const LogLevels = {
   Info: colors.gray('\u21D2'),
   Warn: colors.yellow('\u26A0'),
   Error: colors.red('\u2717'),
-  Debug: colors.magenta('\u2699'),
+  Debug: colors.magenta('d'),
   Confirm: colors.green('\u2713'),
   Music: colors.cyan('\u266A'),
 };
@@ -35,7 +37,13 @@ class Logger {
 
   log(logLevel, message) {
     const { name } = this;
-    console.log(`${logLevel}  (${name}) ${message}`);
+
+    const text = `${logLevel} (${colors.gray(name)}) ${message}`;
+    if (Screen.Instance) {
+      Screen.Instance.log(text);
+    } else {
+      console.log(text);
+    }
   }
 
   info(message) {

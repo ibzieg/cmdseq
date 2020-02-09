@@ -16,31 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const app = require('./package.json');
-const { setupStore } = require('./src/config');
-const Screen = require('./src/screen');
-const logger = require('./src/logger');
+/* eslint-disable import/no-extraneous-dependencies,no-eval */
+const babel = require('@babel/core');
 
-// -----------------------------------------------------------------------------
+function requireJsx(filename) {
+  const { code } = babel.transformFileSync(
+    filename, {
+      presets: ['@babel/preset-env', '@babel/preset-react'],
+    },
+  );
+  return eval(code);
+}
 
-const log = logger.create('main');
-
-Screen.create({
-  onExit: () => {
-    log.info('Exiting');
-    process.exit(0)
-  },
-  onCommandInput: (text) => {
-    log.info(`λ ${text}`);
-  },
-});
-
-(function main() {
-  try {
-    log.info(`${app.name} ${app.version}`);
-    setupStore();
-  } catch (error) {
-    log.error('Unhandled Exception:');
-    log.error(error);
-  }
-}());
+module.exports = requireJsx;

@@ -16,31 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const app = require('./package.json');
-const { setupStore } = require('./src/config');
-const Screen = require('./src/screen');
-const logger = require('./src/logger');
+const requireJsx = require('./require-jsx');
 
-// -----------------------------------------------------------------------------
+const Screen = requireJsx(`${__dirname}/Screen.jsx`);
 
-const log = logger.create('main');
-
-Screen.create({
-  onExit: () => {
-    log.info('Exiting');
-    process.exit(0)
-  },
-  onCommandInput: (text) => {
-    log.info(`λ ${text}`);
-  },
-});
-
-(function main() {
-  try {
-    log.info(`${app.name} ${app.version}`);
-    setupStore();
-  } catch (error) {
-    log.error('Unhandled Exception:');
-    log.error(error);
-  }
-}());
+module.exports = Screen;

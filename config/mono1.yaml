@@ -9,17 +9,17 @@ generator:
     - 42
     - 48
 sequences:
-  - name: introZZaa
+  - name: intro
     steps:
       - null
-      - {pitch: 84, velocity: 77, duration: 8n, mod1: 82, mod2: 60}
+      - {pitch: 84, velocity: 72, duration: 8n, mod1: 82, mod2: 60}
       - null
       - null
       - null
       - null
-      - {pitch: 48, velocity: 76, duration: 8n, mod1: 61, mod2: 74}
+      - {pitch: 48, velocity: 72, duration: 8n, mod1: 61, mod2: 74}
       - null
-      - {pitch: 36, velocity: 114, duration: 8n, mod1: 55, mod2: 31}
+      - {pitch: 36, velocity: 124, duration: 8n, mod1: 55, mod2: 31}
       - null
       - null
       - null

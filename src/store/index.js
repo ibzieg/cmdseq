@@ -20,6 +20,7 @@
 const {
   combineReducers, configureStore, getDefaultMiddleware,
 } = require('@reduxjs/toolkit');
+
 const logger = require('../logger');
 
 const log = logger.create('store');
@@ -29,7 +30,7 @@ const { tracks } = require('./tracks');
 
 function actionLog({ getState }) {
   return (next) => (action) => {
-    log.debug(`Δ ${action.type} { ${Object.keys(action.payload)} }`)
+    log.debug(`Δ ${action.type} { ${Object.keys(action.payload)} }`);
     // console.log('will dispatch', action);
     // Call the next dispatch method in the middleware chain.
     const returnValue = next(action);

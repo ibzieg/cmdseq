@@ -26,6 +26,10 @@ const StateFileWatcher = require('./state-file-watcher');
 const { TrackConfig } = require('./track-config');
 const { generatorDefaults, generateSequence } = require('./generator');
 
+const logger = require('./logger');
+
+const log = logger.create('config');
+
 // -----------------------------------------------------------------------------
 
 function writeDefaultConfig() {
@@ -76,8 +80,8 @@ function writeDefaultConfig() {
       ],
     });
   } catch (error) {
-    console.log('Error generating default track:');
-    console.log(error);
+    log.error('Error generating default track:');
+    log.error(error);
   }
 
   const yaml = safeDump(track, {
@@ -90,7 +94,7 @@ function writeDefaultConfig() {
 function handleStoreStateChange() {
   const state = store.getState();
   const firstTrack = selectFirstTrack(state);
-  console.log(firstTrack.sequences[0].name);
+  log.debug(firstTrack.sequences[0].name);
 }
 
 function handleTrackFileChange(trackConfig) {
