@@ -8,6 +8,8 @@ generator:
     - 36
     - 42
     - 48
+    - 38
+    - 44
 sequences:
   - name: intro
     steps:
@@ -116,7 +118,7 @@ sequences:
       - null
       - {pitch: 36, velocity: 93, duration: 8n, mod1: 28, mod2: 110}
       - null
-      - {pitch: 48, velocity: 106, duration: 8n, mod1: 68, mod2: 107}
+      - {pitch: 48, velocity: 116, duration: 8n, mod1: 68, mod2: 107}
   - name: euclid8
     steps:
       - {pitch: 36, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
@@ -152,7 +154,7 @@ sequences:
       - {pitch: 42, velocity: 46, duration: 8n, mod1: 50, mod2: 51}
       - {pitch: 48, velocity: 68, duration: 8n, mod1: 24, mod2: 84}
       - {pitch: 48, velocity: 100, duration: 8n, mod1: 104, mod2: 82}
-      - {pitch: 48, velocity: 121, duration: 8n, mod1: 90, mod2: 69}
+      - {pitch: 48, velocity: 111, duration: 8n, mod1: 90, mod2: 69}
   - name: ritard
     steps:
       - {pitch: 42, velocity: 86, duration: 8n, mod1: 107, mod2: 102}

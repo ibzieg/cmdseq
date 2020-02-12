@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /*
  * Copyright 2020, Ian Zieg
  *
@@ -16,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import React, { Component } from 'react';
-import blessed from 'blessed';
-import { render } from 'react-blessed';
+const React = require('react');
+const blessed = require('blessed');
+const { render } = require('react-blessed');
 
 const requireJsx = require('./require-jsx');
 
@@ -31,10 +32,6 @@ let _instance;
 // -----------------------------------------------------------------------------
 
 class Screen {
-  static get Instance() {
-    return _instance;
-  }
-
   static get instance() {
     return _instance;
   }
@@ -65,6 +62,7 @@ class Screen {
       title: 'cmdseq',
     });
 
+    // eslint-disable-next-line no-unused-vars
     screen.key(['escape', 'q', 'C-c'], (ch, key) => {
       handleOnExit();
     });

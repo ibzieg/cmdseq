@@ -30,11 +30,11 @@ const { tracks } = require('./tracks');
 
 function actionLog({ getState }) {
   return (next) => (action) => {
-    log.debug(`Δ ${action.type} { ${Object.keys(action.payload)} }`);
-    // console.log('will dispatch', action);
+    log.delta(`${action.type} { ${Object.keys(action.payload)} }`);
+
     // Call the next dispatch method in the middleware chain.
     const returnValue = next(action);
-    // console.log('state after dispatch', getState());
+
     // This will likely be the action itself, unless
     // a middleware further in chain changed it.
     return returnValue;

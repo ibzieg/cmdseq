@@ -16,7 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+/* eslint-disable react/no-string-refs */
 const React = require('react');
+const PropTypes = require('prop-types');
 
 // -----------------------------------------------------------------------------
 
@@ -30,46 +32,51 @@ class CommandBox extends React.Component {
   }
 
   componentDidMount() {
+    const { emitter } = this.props;
+
     setTimeout(() => {
       const { commandInput } = this.refs;
       commandInput.focus();
     }, 0);
 
-    this.props.emitter.on('log', this.appendLog.bind(this));
+    emitter.on('log', this.appendLog.bind(this));
   }
 
   appendLog(text) {
     this.refs.log.insertBottom(text);
     this.refs.log.setScrollPerc(100);
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ lastMessage: text }); // force render
   }
 
   handleKeypress(ch, key) {
+    const { onFunctionKey } = this.props;
+    const { commandHistory, commandHistoryIndex } = this.state;
     const { commandInput } = this.refs;
     const fkeys = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12'];
 
     if (fkeys.indexOf(key.name) >= 0) {
-      if (typeof this.props.onFunctionKey === 'function') {
-        this.props.onFunctionKey(fkeys.indexOf(key.name));
+      if (typeof onFunctionKey === 'function') {
+        onFunctionKey(fkeys.indexOf(key.name));
       }
     } else if (key.name === 'up' || (key.ctrl && key.name === 'p')) {
-      const nextIndex = Math.max(this.state.commandHistoryIndex - 1, 0);
-      const cmd = this.state.commandHistory[nextIndex];
+      const nextIndex = Math.max(commandHistoryIndex - 1, 0);
+      const cmd = commandHistory[nextIndex];
       commandInput.setValue(cmd);
       this.setState({ commandHistoryIndex: nextIndex });
     } else if (key.name === 'down' || (key.ctrl && key.name === 'n')) {
       const nextIndex = Math.min(
-        this.state.commandHistoryIndex + 1,
-        this.state.commandHistory.length
+        commandHistoryIndex + 1,
+        commandHistory.length,
       );
-      const cmd = this.state.commandHistory[nextIndex];
+      const cmd = commandHistory[nextIndex];
       commandInput.setValue(cmd);
       this.setState({ commandHistoryIndex: nextIndex });
     } else if (key.ctrl && key.name === 'c') {
       commandInput.clearValue();
-      this.setState({ commandHistoryIndex: this.state.commandHistory.length });
+      this.setState({ commandHistoryIndex: commandHistory.length });
     } else {
-      this.setState({ commandHistoryIndex: this.state.commandHistory.length });
+      this.setState({ commandHistoryIndex: commandHistory.length });
     }
   }
 
@@ -77,6 +84,9 @@ class CommandBox extends React.Component {
     const {
       top, left, width, height, onCommandInput, onExit,
     } = this.props;
+    const {
+      commandHistory,
+    } = this.state;
     const { commandInput } = this.refs;
     return (
       <box
@@ -125,8 +135,8 @@ class CommandBox extends React.Component {
                 onCommandInput(value);
               }
               this.setState({
-                commandHistory: [...this.state.commandHistory, value],
-                commandHistoryIndex: this.state.commandHistory.length + 1,
+                commandHistory: [...commandHistory, value],
+                commandHistoryIndex: commandHistory.length + 1,
               });
             }
           }}
@@ -136,6 +146,18 @@ class CommandBox extends React.Component {
     );
   }
 }
+
+CommandBox.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  emitter: PropTypes.any.isRequired,
+  top: PropTypes.number.isRequired,
+  left: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  onCommandInput: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired,
+  onFunctionKey: PropTypes.func.isRequired,
+};
 
 // -----------------------------------------------------------------------------
 

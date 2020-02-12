@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const React = require('react');
+const PropTypes = require('prop-types');
 
 const requireJsx = require('./require-jsx');
 
@@ -24,7 +25,7 @@ const CommandBox = requireJsx(`${__dirname}/CommandBox.jsx`);
 
 // -----------------------------------------------------------------------------
 
-const SCREEN_HEIGHT = 30;
+// const SCREEN_HEIGHT = 30;
 const SCREEN_WIDTH = 100;
 
 // -----------------------------------------------------------------------------
@@ -61,6 +62,16 @@ function PerformanceController({
     </element>
   );
 }
+
+PerformanceController.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  log: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  emitter: PropTypes.any.isRequired,
+  onCommandInput: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired,
+  onFunctionKey: PropTypes.func.isRequired,
+};
 
 // -----------------------------------------------------------------------------
 

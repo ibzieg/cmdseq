@@ -33,7 +33,6 @@ const tracks = createSlice({
         };
       },
       prepare(track) {
-        // TODO: check if track with same name already exists
         return { payload: { track } };
       },
     },

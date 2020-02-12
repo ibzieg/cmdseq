@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /*
  * Copyright 2020, Ian Zieg
  *
@@ -19,6 +20,7 @@
 const EventEmitter = require('events');
 
 const React = require('react');
+const PropTypes = require('prop-types');
 
 const requireJsx = require('./require-jsx');
 
@@ -39,11 +41,6 @@ class App extends React.Component {
     this.eventEmitter = new EventEmitter();
   }
 
-  addLogLine(text) {
-    if (this._mounted) {
-      this.eventEmitter.emit('log', text);
-    }
-  }
 
   componentDidMount() {
     this._mounted = true;
@@ -53,20 +50,35 @@ class App extends React.Component {
     this._mounted = false;
   }
 
+  addLogLine(text) {
+    if (this._mounted) {
+      this.eventEmitter.emit('log', text);
+    }
+  }
+
   render() {
+    const { data, scene, log } = this.state;
+    const { onCommandInput, onFunctionKey, onExit } = this.props;
+
     return (
       <PerformanceController
-        data={this.state.data}
-        scene={this.state.scene}
-        log={this.state.log}
+        data={data}
+        scene={scene}
+        log={log}
         emitter={this.eventEmitter}
-        onCommandInput={this.props.onCommandInput}
-        onFunctionKey={this.props.onFunctionKey}
-        onExit={this.props.onExit}
+        onCommandInput={onCommandInput}
+        onFunctionKey={onFunctionKey}
+        onExit={onExit}
       />
     );
   }
 }
+
+App.propTypes = {
+  onCommandInput: PropTypes.func.isRequired,
+  onFunctionKey: PropTypes.func.isRequired,
+  onExit: PropTypes.func.isRequired,
+};
 
 // -----------------------------------------------------------------------------
 

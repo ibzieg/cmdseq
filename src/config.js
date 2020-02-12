@@ -94,7 +94,7 @@ function writeDefaultConfig() {
 function handleStoreStateChange() {
   const state = store.getState();
   const firstTrack = selectFirstTrack(state);
-  log.debug(firstTrack.sequences[0].name);
+  // log.debug(firstTrack.sequences[0].name);
 }
 
 function handleTrackFileChange(trackConfig) {

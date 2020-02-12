@@ -20,6 +20,7 @@ const app = require('./package.json');
 const { setupStore } = require('./src/config');
 const Screen = require('./src/screen');
 const logger = require('./src/logger');
+const { MidiController, MidiDevice } = require('./src/midi');
 
 // -----------------------------------------------------------------------------
 
@@ -28,10 +29,21 @@ const log = logger.create('main');
 Screen.create({
   onExit: () => {
     log.info('Exiting');
-    process.exit(0)
+    process.exit(0);
   },
   onCommandInput: (text) => {
-    log.info(`λ ${text}`);
+    log.command(`${text}`);
+
+    try {
+      // eslint-disable-next-line no-eval
+      const result = eval(text);
+      log.info(`> ${result}`);
+    } catch (error) {
+      log.error(error);
+    }
+  },
+  onFunctionKey: (event) => {
+    log.debug(`Function key pressed: ${event}`);
   },
 });
 
@@ -43,4 +55,21 @@ Screen.create({
     log.error('Unhandled Exception:');
     log.error(error);
   }
+
+  log.info('Input Ports:');
+  MidiDevice.listInputPorts();
+  log.info('Output Ports:');
+  MidiDevice.listOutputPorts();
+
+  this.controller = new MidiController({
+    // device: MidiDevice.devices.Midisport,
+    device: MidiDevice.devices.IAC1,
+    channel: 7,
+    receiveMessage: (status, d1, d2) => {
+      log.music(`MIDI Receive: ${status} ${d1} ${d2}`);
+    },
+    clock: () => { /* log.music('MIDI Transport: Clock'); */ },
+    start: () => { log.music('MIDI Transport: Start'); },
+    stop: () => { log.music('MIDI Transport: Stop'); },
+  });
 }());

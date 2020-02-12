@@ -20,15 +20,21 @@ const colors = require('colors');
 
 const Screen = require('./screen');
 
+// -----------------------------------------------------------------------------
+
 const LogLevels = {
-  Info: colors.gray('\u21D2'),
+  // Info: colors.green('⁖'),
+  Info: colors.gray('i'),
   Warn: colors.yellow('\u26A0'),
   Error: colors.red('\u2717'),
-  Debug: colors.magenta('d'),
+  Debug: colors.magenta('$'),
   Confirm: colors.green('\u2713'),
   Music: colors.cyan('\u266A'),
+  Command: colors.cyan('λ'),
+  Delta: colors.magenta('Δ'),
 };
 
+// -----------------------------------------------------------------------------
 
 class Logger {
   constructor(name) {
@@ -38,9 +44,9 @@ class Logger {
   log(logLevel, message) {
     const { name } = this;
 
-    const text = `${logLevel} (${colors.gray(name)}) ${message}`;
-    if (Screen.Instance) {
-      Screen.Instance.log(text);
+    const text = ` ${logLevel} (${colors.brightBlue(name)}) ${message}`;
+    if (Screen.instance) {
+      Screen.instance.log(text);
     } else {
       console.log(text);
     }
@@ -69,11 +75,21 @@ class Logger {
   music(message) {
     this.log(LogLevels.Music, message);
   }
+
+  command(message) {
+    this.log(LogLevels.Command, message);
+  }
+
+  delta(message) {
+    this.log(LogLevels.Delta, message);
+  }
 }
 
 function create(name) {
   return new Logger(name);
 }
+
+// -----------------------------------------------------------------------------
 
 module.exports = {
   create,
