@@ -19,13 +19,15 @@
 const fs = require('fs');
 
 const { safeDump } = require('js-yaml');
+const { first } = require('lodash');
 
 const store = require('./store');
-const { putTrack, removeTrack, selectFirstTrack } = require('./store/tracks');
+const { putTrack, selectFirstTrack } = require('./store/tracks');
 const StateFileWatcher = require('./state-file-watcher');
 const { TrackConfig } = require('./track-config');
+const { MidiController, MidiDevice } = require('./midi');
 const { generatorDefaults, generateSequence } = require('./generator');
-
+const SequencePlayer = require('./sequence-player');
 const logger = require('./logger');
 
 const log = logger.create('config');
@@ -92,8 +94,8 @@ function writeDefaultConfig() {
 }
 
 function handleStoreStateChange() {
-  const state = store.getState();
-  const firstTrack = selectFirstTrack(state);
+  // const state = store.getState();
+  // const firstTrack = selectFirstTrack(state);
   // log.debug(firstTrack.sequences[0].name);
 }
 
@@ -118,10 +120,53 @@ function setupStore() {
   watchConfigFile();
 }
 
+function setupMidi() {
+  // log.info('Input Ports:');
+  // MidiDevice.listInputPorts();
+  // log.info('Output Ports:');
+  // MidiDevice.listOutputPorts();
+
+  const player = new SequencePlayer();
+
+  let stopCount = 0;
+
+  this.controller = new MidiController({
+    // device: MidiDevice.devices.Midisport,
+    device: MidiDevice.devices.IAC1,
+    channel: 7,
+    receiveMessage: (status, d1, d2) => {
+      log.music(`MIDI Receive: ${status} ${d1} ${d2}`);
+    },
+    clock: () => {
+      const state = store.getState();
+      const track = selectFirstTrack(state);
+      const { playback, sequences } = track;
+      const sequence = first(sequences);
+
+      // log.music('clock');
+      player.clock(playback, sequence);
+    },
+    start: () => {
+      stopCount = 0;
+      log.music('Clock Start');
+    },
+    stop: () => {
+      stopCount += 1;
+      if (stopCount <= 1) {
+        log.music('Clock Stop');
+      } else {
+        log.music('Clock Reset');
+        player.reset();
+      }
+    },
+  });
+}
+
 // -----------------------------------------------------------------------------
 
 module.exports = {
   writeDefaultConfig,
   watchConfigFile,
   setupStore,
+  setupMidi,
 };

@@ -27,13 +27,6 @@ const Log = logger.create('midi-instrument');
 // const drumMap = [36, 38, 39, 42, 46, 49, 75, 67];
 
 class MidiInstrument {
-  /*  static get instruments() {
-    return instruments;
-  } */
-
-  /*  static get drumMap() {
-    return drumMap;
-  } */
 
   get channel() {
     return this.options.channel;
@@ -55,6 +48,7 @@ class MidiInstrument {
     if (this.midiDevice.outputStatus) {
       try {
         this.midiDevice.output.sendMessage([noteOnStatus, note, velocity]);
+        // Log.music(`Output MIDI message [${noteOnStatus},${note},${velocity}]`);
       } catch (ex) {
         Log.error(
           `Failed to send MIDI message [${noteOnStatus},${note},${velocity}]: ${ex}`,
@@ -63,6 +57,7 @@ class MidiInstrument {
       setTimeout(() => {
         try {
           this.midiDevice.output.sendMessage([noteOffStatus, note, velocity]);
+          // Log.music(`Output MIDI message [${noteOnStatus},${note},${velocity}]`);
         } catch (ex) {
           Log.error(
             `Failed to send MIDI message [${noteOnStatus},${note},${velocity}]: ${ex}`,

@@ -82,6 +82,9 @@ class MidiController {
       }
     } else {
       switch (status) {
+        case 242: // Song Position Pointer
+          // Log.music(`Song Position Pointer ${d1} ${d2}`);
+          break;
         case 248: // Timing
           this.clock();
           break;

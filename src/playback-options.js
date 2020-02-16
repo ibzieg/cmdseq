@@ -28,6 +28,8 @@ const PlaybackOptions = superstruct({
     midiNumber: isMidiNumber,
   },
 })({
+  device: 'string',
+  channel: 'number',
   mute: 'boolean?',
   rate: 'number',
   follow: 'string?',

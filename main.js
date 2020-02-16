@@ -17,10 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const app = require('./package.json');
-const { setupStore } = require('./src/config');
+const { setupStore, setupMidi } = require('./src/config');
 const Screen = require('./src/screen');
 const logger = require('./src/logger');
-const { MidiController, MidiDevice } = require('./src/midi');
 
 // -----------------------------------------------------------------------------
 
@@ -51,25 +50,10 @@ Screen.create({
   try {
     log.info(`${app.name} ${app.version}`);
     setupStore();
+    setupMidi();
   } catch (error) {
     log.error('Unhandled Exception:');
     log.error(error);
   }
 
-  log.info('Input Ports:');
-  MidiDevice.listInputPorts();
-  log.info('Output Ports:');
-  MidiDevice.listOutputPorts();
-
-  this.controller = new MidiController({
-    // device: MidiDevice.devices.Midisport,
-    device: MidiDevice.devices.IAC1,
-    channel: 7,
-    receiveMessage: (status, d1, d2) => {
-      log.music(`MIDI Receive: ${status} ${d1} ${d2}`);
-    },
-    clock: () => { /* log.music('MIDI Transport: Clock'); */ },
-    start: () => { log.music('MIDI Transport: Start'); },
-    stop: () => { log.music('MIDI Transport: Stop'); },
-  });
 }());
