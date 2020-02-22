@@ -22,15 +22,37 @@ const { safeDump } = require('js-yaml');
 const { first } = require('lodash');
 
 const store = require('./store');
-const { putTrack, selectFirstTrack } = require('./store/tracks');
+const {
+  putTrack,
+  selectTracks,
+} = require('./store/tracks');
+const {
+  putPerformance,
+  selectController,
+  selectInstruments,
+  selectScenes,
+} = require('./store/performance-store');
 const StateFileWatcher = require('./state-file-watcher');
-const { TrackConfig } = require('./track-config');
+const { TrackConfig } = require('./schema/track-config');
 const { MidiController, MidiDevice } = require('./midi');
 const { generatorDefaults, generateSequence } = require('./generator');
 const SequencePlayer = require('./sequence-player');
+const { PerformanceSchema } = require('./schema/performance-schema');
 const logger = require('./logger');
 
 const log = logger.create('config');
+
+// -----------------------------------------------------------------------------
+
+const performanceDir = 'config';
+const performanceName = 'performance';
+
+const watchers = new Map();
+const players = new Map();
+
+let hasPerformanceFileLoaded = false;
+
+let stopCount = 0;
 
 // -----------------------------------------------------------------------------
 
@@ -104,69 +126,127 @@ function handleTrackFileChange(trackConfig) {
   dispatch(putTrack(trackConfig));
 }
 
-function watchConfigFile() {
-  const configFilename = 'config/mono1.yaml';
+function handlePerformanceFileChange(perfConfig) {
+  const { dispatch } = store;
+  dispatch(putPerformance(perfConfig));
+  if (!hasPerformanceFileLoaded) {
+    // eslint-disable-next-line no-use-before-define
+    performanceFileDidLoad();
+    hasPerformanceFileLoaded = true;
+  }
+  watchTrackConfigs();
+}
 
-  const trackWatcher = new StateFileWatcher(
-    configFilename, {
-      schema: TrackConfig,
-      onLoad: handleTrackFileChange,
-    },
-  );
+function getInstrumentFileName(name) {
+  const dirname = performanceDir;
+  return `${dirname}/${name}.yaml`;
+}
+
+function watchPerformanceConfig() {
+  const name = performanceName;
+  if (!watchers.has(name)) {
+    watchers.set(name, new StateFileWatcher(
+      getInstrumentFileName(name), {
+        schema: PerformanceSchema,
+        onLoad: handlePerformanceFileChange,
+      },
+    ));
+  }
+}
+
+function watchTrackConfigs() {
+  const instruments = selectInstruments(store.getState());
+  instruments.forEach((instrument) => {
+    const { name } = instrument;
+
+    if (!watchers.has(name)) {
+      watchers.set(name, new StateFileWatcher(
+        getInstrumentFileName(name), {
+          schema: TrackConfig,
+          onLoad: handleTrackFileChange,
+        },
+      ));
+    }
+
+    if (!players.has(name)) {
+      players.set(name, new SequencePlayer());
+    }
+  });
+}
+
+function midiStop() {
+  stopCount += 1;
+  if (stopCount <= 1) {
+    log.music('Clock Stop');
+  } else {
+    log.music('Clock Reset');
+  }
+
+  players.forEach((player) => player.reset());
+}
+
+function midiStart() {
+  stopCount = 0;
+  log.music('Clock Start');
+}
+
+function midiClock() {
+  const state = store.getState();
+  const scenes = selectScenes(state);
+  const tracks = selectTracks(state);
+
+  const scene = first(scenes);
+
+  scene.tracks.forEach(({ name, play }) => {
+    const { playback, sequences } = tracks[name];
+    const seqName = first(play);
+    const sequence = sequences.find((s) => s.name === seqName);
+
+    const player = players.get(name);
+    if (player) {
+      player.clock(playback, sequence);
+    } else {
+      log.debug(`player '${name}' not found`);
+    }
+  });
 }
 
 function setupStore() {
   store.subscribe(handleStoreStateChange);
-  watchConfigFile();
+  watchPerformanceConfig();
 }
 
 function setupMidi() {
-  // log.info('Input Ports:');
-  // MidiDevice.listInputPorts();
-  // log.info('Output Ports:');
-  // MidiDevice.listOutputPorts();
+  const state = store.getState();
+  const { device, channel } = selectController(state);
+  const midiDevice = MidiDevice.devices[device];
 
-  const player = new SequencePlayer();
 
-  let stopCount = 0;
-
-  this.controller = new MidiController({
-    // device: MidiDevice.devices.Midisport,
-    device: MidiDevice.devices.IAC1,
-    channel: 7,
+  // eslint-disable-next-line no-unused-vars
+  const midiController = new MidiController({
+    device: midiDevice,
+    channel,
     receiveMessage: (status, d1, d2) => {
       log.music(`MIDI Receive: ${status} ${d1} ${d2}`);
     },
-    clock: () => {
-      const state = store.getState();
-      const track = selectFirstTrack(state);
-      const { playback, sequences } = track;
-      const sequence = first(sequences);
-
-      // log.music('clock');
-      player.clock(playback, sequence);
-    },
-    start: () => {
-      stopCount = 0;
-      log.music('Clock Start');
-    },
-    stop: () => {
-      stopCount += 1;
-      if (stopCount <= 1) {
-        log.music('Clock Stop');
-      } else {
-        log.music('Clock Reset');
-        player.reset();
-      }
-    },
+    clock: midiClock,
+    start: midiStart,
+    stop: midiStop,
   });
+}
+
+
+function performanceFileDidLoad() {
+  setupMidi();
+}
+
+function run() {
+  setupStore();
+  setupMidi();
 }
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
-  writeDefaultConfig,
-  watchConfigFile,
-  setupStore,
-  setupMidi,
+  run,
 };

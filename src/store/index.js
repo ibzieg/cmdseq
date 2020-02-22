@@ -26,7 +26,7 @@ const logger = require('../logger');
 const log = logger.create('store');
 
 const { tracks } = require('./tracks');
-
+const { performance } = require('./performance-store');
 
 function actionLog({ getState }) {
   return (next) => (action) => {
@@ -44,6 +44,7 @@ function actionLog({ getState }) {
 const store = configureStore({
   reducer: combineReducers({
     tracks: tracks.reducer,
+    performance: performance.reducer,
   }),
   middleware: [...getDefaultMiddleware(), actionLog],
 });

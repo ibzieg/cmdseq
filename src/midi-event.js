@@ -17,11 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const { superstruct } = require('superstruct');
-const { isEmpty } = require('lodash');
+const { isEmpty, isNumber } = require('lodash');
 
 // -----------------------------------------------------------------------------
 
 const isMidiNumber = (value) => value >= 0 && value <= 127;
+const isMidiChannel = (value) => isNumber(value) && value >= 0 && value <= 16;
 
 const NoteEvent = superstruct({
   types: {
@@ -69,6 +70,7 @@ function makeRandomNoteEvent(options = {}) {
 module.exports = {
   NoteEvent,
   isMidiNumber,
+  isMidiChannel,
   isNoteEvent,
   getRandomInt,
   makeRandomNoteEvent,

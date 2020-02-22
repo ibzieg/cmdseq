@@ -19,7 +19,7 @@
 const { superstruct } = require('superstruct');
 const { isEmpty } = require('lodash');
 
-const { isMidiNumber } = require('./midi-event');
+const { isMidiNumber } = require('../midi-event');
 
 // -----------------------------------------------------------------------------
 

@@ -18,48 +18,44 @@
  */
 const { createSlice } = require('@reduxjs/toolkit');
 const { createSelector } = require('reselect');
-const { first, values } = require('lodash');
 
-const tracks = createSlice({
-  name: 'tracks',
+const performanceStore = createSlice({
+  name: 'performance',
   initialState: {},
   reducers: {
-    putTrack: {
+    putPerformance: {
       reducer(state, action) {
-        const { track } = action.payload;
-        return {
-          ...state,
-          [track.name]: track,
-        };
+        const { performance } = action.payload;
+        return performance;
       },
-      prepare(track) {
-        return { payload: { track } };
-      },
-    },
-    removeTrack: {
-      reducer(state, action) {
-        const { name } = action.payload;
-        const nextState = { ...state };
-        delete nextState[name];
-        return nextState;
-      },
-      prepare(name) {
-        return { payload: { name } };
+      prepare(performance) {
+        return { payload: { performance } };
       },
     },
   },
 });
 
-const selectTracks = (state) => state.tracks;
+const selectPerformance = (state) => state.performance;
 
-const selectFirstTrack = createSelector(
-  selectTracks,
-  (tracksState) => tracksState[first(Object.keys(tracksState))],
+const selectController = createSelector(
+  selectPerformance,
+  (performanceState) => performanceState.controller,
+);
+
+const selectInstruments = createSelector(
+  selectPerformance,
+  (performanceState) => performanceState.instruments,
+);
+
+const selectScenes = createSelector(
+  selectPerformance,
+  (performanceState) => performanceState.scenes,
 );
 
 module.exports = {
-  tracks,
-  ...tracks.actions,
-  selectFirstTrack,
-  selectTracks,
+  performance: performanceStore,
+  ...performanceStore.actions,
+  selectController,
+  selectInstruments,
+  selectScenes
 };

@@ -1,0 +1,66 @@
+name: kick
+playback:
+  device: MOTU828x
+  channel: 14
+  rate: 2
+generator:
+  length: 16
+  steps: 4
+  type: quadrant
+  notes:
+    - 36
+sequences:
+  - name: A
+    steps:
+      - {pitch: 36, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 44, duration: 8n, mod1: 75, mod2: 88}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 36, duration: 8n, mod1: 52, mod2: 70}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 120, duration: 8n, mod1: 27, mod2: 73}
+      - null
+      - null
+      - null
+  - name: B
+    steps:
+      - {pitch: 36, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
+      - null
+      - null
+      - {pitch: 36, velocity: 110, duration: 8n, mod1: 30, mod2: 86}
+      - null
+      - {pitch: 36, velocity: 120, duration: 8n, mod1: 97, mod2: 91}
+      - null
+      - null
+      - {pitch: 36, velocity: 65, duration: 8n, mod1: 73, mod2: 56}
+      - null
+      - null
+      - null # {pitch: 36, velocity: 53, duration: 8n, mod1: 24, mod2: 29}
+      - null
+      - {pitch: 36, velocity: 120, duration: 8n, mod1: 110, mod2: 83}
+      - null
+      - null
+  - name: quarter
+    steps:
+      - {pitch: 36, velocity: 93, duration: 8n, mod1: 98, mod2: 112}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 98, duration: 8n, mod1: 29, mod2: 43}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 59, duration: 8n, mod1: 109, mod2: 23}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 126, duration: 8n, mod1: 99, mod2: 32}
+      - null
+      - null
+      - null

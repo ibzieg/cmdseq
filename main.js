@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const app = require('./package.json');
-const { setupStore, setupMidi } = require('./src/config');
+const { run } = require('./src/performance');
 const Screen = require('./src/screen');
 const logger = require('./src/logger');
 
@@ -49,11 +49,9 @@ Screen.create({
 (function main() {
   try {
     log.info(`${app.name} ${app.version}`);
-    setupStore();
-    setupMidi();
+    run();
   } catch (error) {
     log.error('Unhandled Exception:');
-    log.error(error);
+    log.error(error.message);
   }
-
 }());

@@ -19,34 +19,27 @@
 const { superstruct } = require('superstruct');
 const { isEmpty } = require('lodash');
 
-const { isSequence } = require('./sequence');
-const { isGenerator } = require('./generator');
-const { isPlaybackOptions } = require('./playback-options');
+const { isMidiChannel } = require('../midi-event');
 
 // -----------------------------------------------------------------------------
 
-const TrackConfig = superstruct({
+const ControllerSchema = superstruct({
   types: {
-    generator: isGenerator,
-    sequence: isSequence,
-    playbackOptions: isPlaybackOptions,
+    midiChannel: isMidiChannel,
   },
 })({
-  playback: 'playbackOptions',
-  generator: 'generator',
-  sequences: ['sequence'],
+  device: 'string',
+  channel: 'midiChannel',
 });
 
-const isTrackConfig = (value) => {
-  const [error] = TrackConfig.validate(value);
+const isControllerSchema = (value) => {
+  const [error] = ControllerSchema.validate(value);
   return isEmpty(error);
 };
 
 // -----------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------
-
 module.exports = {
-  TrackConfig,
-  isTrackConfig,
+  ControllerSchema,
+  isControllerSchema,
 };

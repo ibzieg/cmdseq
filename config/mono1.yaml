@@ -1,7 +1,8 @@
+name: mono1
 playback:
   device: MOTU828x
   channel: 1
-  rate: 4
+  rate: 2
 generator:
   length: 16
   steps: 4
@@ -23,29 +24,45 @@ sequences:
       - null
       - {pitch: 48, velocity: 72, duration: 8n, mod1: 61, mod2: 74}
       - null
-      - {pitch: 39, velocity: 124, duration: 8n, mod1: 55, mod2: 31}
+      - {pitch: 42, velocity: 124, duration: 8n, mod1: 55, mod2: 31}
+      - null
+      - {pitch: 24, velocity: 118, duration: 8n, mod1: 48, mod2: 99}
+      - null
+      - {pitch: 52, velocity: 48, duration: 8n, mod1: 48, mod2: 99}
       - null
       - null
       - null
-      - {pitch: 54, velocity: 48, duration: 8n, mod1: 48, mod2: 99}
+      - {pitch: 42, velocity: 110, duration: 8n, mod1: 82, mod2: 60}
+      - null
+      - null
+      - null
+      - {pitch: 52, velocity: 122, duration: 8n, mod1: 82, mod2: 60}
+      - null
+      - {pitch: 48, velocity: 72, duration: 8n, mod1: 61, mod2: 74}
+      - null
+      - {pitch: 36, velocity: 124, duration: 8n, mod1: 55, mod2: 31}
+      - null
+      - {pitch: 24, velocity: 118, duration: 8n, mod1: 48, mod2: 99}
+      - null
+      - {pitch: 52, velocity: 48, duration: 8n, mod1: 48, mod2: 99}
       - null
       - null
       - null
   - name: A
     steps:
-      - {pitch: 36, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
+      - {pitch: 48, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
+      - null
       - null
       - null
       - {pitch: 36, velocity: 44, duration: 8n, mod1: 75, mod2: 88}
       - null
       - null
+      - null
       - {pitch: 36, velocity: 36, duration: 8n, mod1: 52, mod2: 70}
       - null
       - null
-      - {pitch: 48, velocity: 120, duration: 8n, mod1: 27, mod2: 73}
       - null
-      - null
-      - {pitch: 42, velocity: 80, duration: 8n, mod1: 59, mod2: 108}
+      - {pitch: 36, velocity: 120, duration: 8n, mod1: 27, mod2: 73}
       - null
       - null
       - null

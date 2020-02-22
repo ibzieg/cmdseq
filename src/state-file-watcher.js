@@ -43,7 +43,7 @@ class StateFileWatcher {
     } catch (error) {
       log.error(error);
     }
-    return null;
+    return undefined/* null */;
   }
 
   constructor(filename, { schema, onLoad = () => {} }) {
@@ -57,6 +57,7 @@ class StateFileWatcher {
   }
 
   createWatcher() {
+    // eslint-disable-next-line no-unused-vars
     this.watcher = fs.watch(this.filename, (event, filename) => {
       this.loadFile();
     });
