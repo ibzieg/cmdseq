@@ -20,7 +20,7 @@
 const fs = require('fs');
 
 const { safeDump } = require('js-yaml');
-const { first, isEmpty } = require('lodash');
+const { isEmpty } = require('lodash');
 
 const store = require('./store');
 const {
@@ -54,6 +54,8 @@ const players = new Map();
 let hasPerformanceFileLoaded = false;
 
 let stopCount = 0;
+let sceneIndex = 0;
+let repeatCount = 0;
 
 // -----------------------------------------------------------------------------
 
@@ -175,6 +177,20 @@ function watchTrackConfigs() {
   });
 }
 
+function resetPlayers() {
+  players.forEach((player) => player.reset());
+}
+
+function startPlayers() {
+  players.forEach((player) => player.start());
+}
+
+function reset() {
+  sceneIndex = 0;
+  repeatCount = 0;
+  resetPlayers();
+}
+
 function midiStop() {
   stopCount += 1;
   if (stopCount <= 1) {
@@ -182,8 +198,7 @@ function midiStop() {
   } else {
     log.music('Clock Reset');
   }
-
-  players.forEach((player) => player.reset());
+  reset();
 }
 
 function midiStart() {
@@ -196,9 +211,15 @@ function midiClock() {
   const scenes = selectScenes(state);
   const tracks = selectTracks(state);
 
-  const scene = first(scenes);
+  const scene = scenes[sceneIndex % scenes.length];
+  const { repeat } = scene;
 
-  const playTrack = ({ name, play, follow }, launchNext = false) => {
+  let readyNextScene = false;
+
+  const playTrack = (sceneTrack, launchNext = false) => {
+    const {
+      name, play, follow, master,
+    } = sceneTrack;
     if (!tracks[name]) {
       return;
     }
@@ -220,19 +241,30 @@ function midiClock() {
     }
 
     // Play any tracks that are following this one
-    scene.tracks.forEach((sceneTrack) => {
-      if (sceneTrack.follow === name) {
-        playTrack(sceneTrack, eventDidExecute);
+    scene.tracks.forEach((t) => {
+      if (t.follow === name) {
+        playTrack(t, eventDidExecute);
       }
     });
+
+    if (master && player) {
+      if (player.startCount >= repeat) {
+        readyNextScene = true;
+      }
+    }
   };
 
   // Start by playing all the non-followers
-  scene.tracks.forEach((sceneTrack) => {
-    if (isEmpty(sceneTrack.follow)) {
-      playTrack(sceneTrack);
+  scene.tracks.forEach((t) => {
+    if (isEmpty(t.follow)) {
+      playTrack(t);
     }
   });
+
+  if (readyNextScene) {
+    sceneIndex += 1;
+    startPlayers();
+  }
 }
 
 function setupStore() {

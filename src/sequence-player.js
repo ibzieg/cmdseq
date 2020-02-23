@@ -62,6 +62,12 @@ class SequencePlayer {
     this.startCount = 0;
   }
 
+  start() {
+    this.loopCount = 0;
+    this.stepCount = 0;
+    this.startCount = 0;
+  }
+
   clock(playbackOptions, sequence, shouldLoop = true) {
     const { clockCount } = this;
     const { rate, device, channel } = playbackOptions;

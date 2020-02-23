@@ -20,9 +20,32 @@ scenes:
     repeat: 4
     tracks:
       - name: kick
-        play: [B, C]
+        master: true
+        play: [A]
+
+      - name: mono1
+        play: [intro]
+
+  - name: transition
+    repeat: 2
+    tracks:
+      - name: kick
+        master: true
+        play: [A]
+
       - name: snare
         play: [half]
+
+  - name: section1
+    repeat: 4
+    tracks:
+      - name: kick
+        master: true
+        play: [B, C]
+
+      - name: snare
+        play: [half]
+
       - name: mono1
         follow: kick
         play: [follow1, follow2]

@@ -24,8 +24,9 @@ const SceneTrack = superstruct({
   },
 })({
   name: 'string',
-  play: ['string?'],
   follow: 'string?',
+  master: 'boolean?',
+  play: ['string?'],
 });
 
 const isSceneTrack = (value) => {
