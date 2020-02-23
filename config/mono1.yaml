@@ -2,7 +2,7 @@ name: mono1
 playback:
   device: MOTU828x
   channel: 1
-  rate: 2
+  rate: 4
 generator:
   length: 16
   steps: 4
@@ -54,19 +54,37 @@ sequences:
       - null
       - null
       - null
-      - {pitch: 36, velocity: 44, duration: 8n, mod1: 75, mod2: 88}
+      - {pitch: 46, velocity: 44, duration: 8n, mod1: 75, mod2: 88}
       - null
       - null
       - null
-      - {pitch: 36, velocity: 36, duration: 8n, mod1: 52, mod2: 70}
+      - {pitch: 44, velocity: 36, duration: 8n, mod1: 52, mod2: 70}
       - null
       - null
       - null
-      - {pitch: 36, velocity: 120, duration: 8n, mod1: 27, mod2: 73}
+      - {pitch: 42, velocity: 120, duration: 8n, mod1: 27, mod2: 73}
       - null
       - null
       - null
   - name: B
+    steps:
+      - {pitch: 60, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
+      - null
+      - null
+      - null
+      - {pitch: 62, velocity: 120, duration: 8n, mod1: 97, mod2: 91}
+      - null
+      - null
+      - null
+      - {pitch: 64, velocity: 65, duration: 8n, mod1: 73, mod2: 56}
+      - null
+      - null
+      - null
+      - {pitch: 66, velocity: 53, duration: 8n, mod1: 24, mod2: 29}
+      - null
+      - null
+      - null
+  - name: C
     steps:
       - {pitch: 48, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
       - null
@@ -180,14 +198,32 @@ sequences:
       - {pitch: 48, velocity: 26, duration: 8n, mod1: 46, mod2: 65}
       - {pitch: 42, velocity: 99, duration: 8n, mod1: 27, mod2: 66}
       - {pitch: 36, velocity: 123, duration: 8n, mod1: 13, mod2: 86}
+      #
       - null
       - {pitch: 42, velocity: 46, duration: 8n, mod1: 53, mod2: 35}
       - null
       - null
+      #
       - {pitch: 36, velocity: 49, duration: 8n, mod1: 79, mod2: 27}
       - null
       - null
       - {pitch: 36, velocity: 83, duration: 8n, mod1: 107, mod2: 102}
+      #
       - null
       - null
       - {pitch: 48, velocity: 33, duration: 8n, mod1: 71, mod2: 65}
+      - null
+
+  - name: follow1
+    steps:
+      - {pitch: 62, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
+      - {pitch: 54, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
+      - {pitch: 66, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
+      - null
+
+  - name: follow2
+    steps:
+      - {pitch: 47, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
+      - {pitch: 54, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
+      - {pitch: 43, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
+      - null

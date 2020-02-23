@@ -12,12 +12,17 @@ instruments:
   - name: kick
     device: MOTU828x
     channel: 14
+  - name: snare
+    device: MOTU828x
+    channel: 14
 scenes:
   - name: intro
     repeat: 4
     tracks:
       - name: kick
-        play: [A, B]
+        play: [B, C]
+      - name: snare
+        play: [half]
       - name: mono1
         follow: kick
-        play: [intro]
+        play: [follow1, follow2]

@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /*
  * Copyright 2020, Ian Zieg
  *
@@ -19,7 +20,7 @@
 const fs = require('fs');
 
 const { safeDump } = require('js-yaml');
-const { first } = require('lodash');
+const { first, isEmpty } = require('lodash');
 
 const store = require('./store');
 const {
@@ -56,6 +57,7 @@ let stopCount = 0;
 
 // -----------------------------------------------------------------------------
 
+// eslint-disable-next-line no-unused-vars
 function writeDefaultConfig() {
   let track = {};
   try {
@@ -138,8 +140,7 @@ function handlePerformanceFileChange(perfConfig) {
 }
 
 function getInstrumentFileName(name) {
-  const dirname = performanceDir;
-  return `${dirname}/${name}.yaml`;
+  return `${performanceDir}/${name}.yaml`;
 }
 
 function watchPerformanceConfig() {
@@ -197,16 +198,39 @@ function midiClock() {
 
   const scene = first(scenes);
 
-  scene.tracks.forEach(({ name, play }) => {
+  const playTrack = ({ name, play, follow }, launchNext = false) => {
+    if (!tracks[name]) {
+      return;
+    }
     const { playback, sequences } = tracks[name];
-    const seqName = first(play);
-    const sequence = sequences.find((s) => s.name === seqName);
+
+    let eventDidExecute = false;
 
     const player = players.get(name);
     if (player) {
-      player.clock(playback, sequence);
-    } else {
-      log.debug(`player '${name}' not found`);
+      const seqNameIndex = player.loopCount;
+      const seqName = play[seqNameIndex % play.length];
+      const sequence = sequences.find((s) => s.name === seqName);
+
+      const shouldLoop = isEmpty(follow);
+      if (launchNext) {
+        player.next();
+      }
+      eventDidExecute = player.clock(playback, sequence, shouldLoop);
+    }
+
+    // Play any tracks that are following this one
+    scene.tracks.forEach((sceneTrack) => {
+      if (sceneTrack.follow === name) {
+        playTrack(sceneTrack, eventDidExecute);
+      }
+    });
+  };
+
+  // Start by playing all the non-followers
+  scene.tracks.forEach((sceneTrack) => {
+    if (isEmpty(sceneTrack.follow)) {
+      playTrack(sceneTrack);
     }
   });
 }
@@ -220,7 +244,6 @@ function setupMidi() {
   const state = store.getState();
   const { device, channel } = selectController(state);
   const midiDevice = MidiDevice.devices[device];
-
 
   // eslint-disable-next-line no-unused-vars
   const midiController = new MidiController({

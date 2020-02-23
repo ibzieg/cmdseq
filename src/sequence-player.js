@@ -18,19 +18,31 @@
  */
 const MidiInstrument = require('./midi/midi-instrument');
 const ExternalDevices = require('./midi/external-devices');
-
 const logger = require('./logger');
 
+// -----------------------------------------------------------------------------
+
+const PARTS_PER_QUANT = 48;
+
+
+// eslint-disable-next-line no-unused-vars
 const log = logger.create('player');
+
+// -----------------------------------------------------------------------------
 
 function runStepEvent(stepEvent, midiInstrument) {
   if (stepEvent && midiInstrument) {
     const {
+      // eslint-disable-next-line no-unused-vars
       pitch, velocity, duration, mod1, mod2,
     } = stepEvent;
     midiInstrument.play(pitch, velocity, 100);
+    return true;
   }
+  return false;
 }
+
+// -----------------------------------------------------------------------------
 
 class SequencePlayer {
   constructor() {
@@ -40,34 +52,50 @@ class SequencePlayer {
   reset() {
     this.clockCount = 0;
     this.stepCount = 0;
+    this.loopCount = 0;
+    this.startCount = 0;
   }
 
-  clock(playbackOptions, sequence) {
+  next() {
+    this.loopCount += 1;
+    this.stepCount = 0;
+    this.startCount = 0;
+  }
+
+  clock(playbackOptions, sequence, shouldLoop = true) {
     const { clockCount } = this;
     const { rate, device, channel } = playbackOptions;
 
-    const ppq = 24;
-    const clockMod = Math.floor(ppq / rate);
+    const clockMod = Math.floor(PARTS_PER_QUANT / rate);
+
+    let eventDidExecute = false;
 
     if (clockCount % clockMod === 0) {
       const { stepCount } = this;
 
-      const { steps } = sequence;
-      const { length } = steps;
-      const stepIndex = stepCount % length;
-      const stepEvent = steps[stepIndex];
+      if (shouldLoop || this.startCount === 0) {
+        const { steps } = sequence;
+        const { length } = steps;
+        const stepIndex = stepCount % length;
+        const stepEvent = steps[stepIndex];
 
-      const instrument = new MidiInstrument({
-        channel,
-        device: ExternalDevices.devices[device],
-      });
+        const instrument = new MidiInstrument({
+          channel,
+          device: ExternalDevices.devices[device],
+        });
 
-      // log.debug(`play step ${stepIndex}`);
-      runStepEvent(stepEvent, instrument);
+        eventDidExecute = runStepEvent(stepEvent, instrument);
 
-      this.stepCount += 1;
+        this.stepCount = (stepCount + 1) % length;
+        if (this.stepCount === 0) {
+          this.loopCount += 1;
+          this.startCount += 1;
+        }
+      }
     }
     this.clockCount += 1;
+
+    return eventDidExecute;
   }
 }
 

@@ -103,7 +103,16 @@ const instruments = {
   },
 };
 
-const drumMap = [36, 38, 39, 42, 46, 49, 75, 67];
+const drumMap = [
+  36,
+  38,
+  39,
+  42,
+  46,
+  49,
+  75,
+  67,
+];
 
 module.exports = {
   devices,
