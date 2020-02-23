@@ -33,7 +33,7 @@ sequences:
       - {pitch: 36, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
       - null
       - null
-      - null # {pitch: 36, velocity: 110, duration: 8n, mod1: 30, mod2: 86}
+      - null
       - null
       - {pitch: 36, velocity: 120, duration: 8n, mod1: 97, mod2: 91}
       - null
@@ -41,31 +41,11 @@ sequences:
       - {pitch: 36, velocity: 65, duration: 8n, mod1: 73, mod2: 56}
       - null
       - null
-      - null # {pitch: 36, velocity: 53, duration: 8n, mod1: 24, mod2: 29}
+      - null
       - null
       - {pitch: 36, velocity: 120, duration: 8n, mod1: 110, mod2: 83}
       - null
       - null
-
-  - name: C
-    steps:
-      - {pitch: 36, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
-      - null
-      - null
-      - {pitch: 36, velocity: 110, duration: 8n, mod1: 30, mod2: 86}
-      - null
-      - {pitch: 36, velocity: 120, duration: 8n, mod1: 97, mod2: 91}
-      - null
-      - null
-      - {pitch: 36, velocity: 65, duration: 8n, mod1: 73, mod2: 56}
-      - null
-      - null
-      - null # {pitch: 36, velocity: 53, duration: 8n, mod1: 24, mod2: 29}
-      - null
-      - {pitch: 36, velocity: 120, duration: 8n, mod1: 110, mod2: 83}
-      - null
-      - null
-
   - name: quarter
     steps:
       - {pitch: 36, velocity: 93, duration: 8n, mod1: 98, mod2: 112}
@@ -83,4 +63,22 @@ sequences:
       - {pitch: 36, velocity: 126, duration: 8n, mod1: 99, mod2: 32}
       - null
       - null
+      - null
+  - name: C
+    steps:
+      - null
+      - null
+      - {pitch: 36, velocity: 74, duration: 8n, mod1: 94, mod2: 63}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 82, duration: 8n, mod1: 69, mod2: 80}
+      - null
+      - {pitch: 36, velocity: 116, duration: 8n, mod1: 37, mod2: 32}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 92, duration: 8n, mod1: 86, mod2: 66}
       - null

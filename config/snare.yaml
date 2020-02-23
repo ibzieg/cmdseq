@@ -41,7 +41,7 @@ sequences:
       - {pitch: 38, velocity: 65, duration: 8n, mod1: 73, mod2: 56}
       - null
       - null
-      - null # {pitch: 38, velocity: 53, duration: 8n, mod1: 24, mod2: 29}
+      - null
       - null
       - {pitch: 38, velocity: 120, duration: 8n, mod1: 110, mod2: 83}
       - null
@@ -61,6 +61,24 @@ sequences:
       - null
       - null
       - {pitch: 38, velocity: 126, duration: 8n, mod1: 99, mod2: 32}
+      - null
+      - null
+      - null
+  - name: myTest
+    steps:
+      - {pitch: 38, velocity: 49, duration: 8n, mod1: 89, mod2: 108}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 86, duration: 8n, mod1: 59, mod2: 16}
+      - null
+      - null
+      - {pitch: 38, velocity: 26, duration: 8n, mod1: 105, mod2: 14}
+      - null
+      - null
+      - {pitch: 38, velocity: 92, duration: 8n, mod1: 46, mod2: 109}
       - null
       - null
       - null

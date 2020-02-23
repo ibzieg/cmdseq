@@ -198,34 +198,51 @@ sequences:
       - {pitch: 48, velocity: 26, duration: 8n, mod1: 46, mod2: 65}
       - {pitch: 42, velocity: 99, duration: 8n, mod1: 27, mod2: 66}
       - {pitch: 36, velocity: 123, duration: 8n, mod1: 13, mod2: 86}
-      #
       - null
       - {pitch: 42, velocity: 46, duration: 8n, mod1: 53, mod2: 35}
       - null
       - null
-      #
       - {pitch: 36, velocity: 49, duration: 8n, mod1: 79, mod2: 27}
       - null
       - null
       - {pitch: 36, velocity: 83, duration: 8n, mod1: 107, mod2: 102}
-      #
       - null
       - null
       - {pitch: 48, velocity: 33, duration: 8n, mod1: 71, mod2: 65}
       - null
-
   - name: follow1
     steps:
-      - {pitch: 62, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
+      - {pitch: 36, velocity: 58, duration: 8n, mod1: 66, mod2: 29}
       - null
-      - {pitch: 54, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
-      - {pitch: 66, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
       - null
-
+      - null
+      - null
+      - {pitch: 36, velocity: 51, duration: 8n, mod1: 71, mod2: 95}
+      - null
+      - null
+      - {pitch: 36, velocity: 125, duration: 8n, mod1: 26, mod2: 37}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 44, velocity: 113, duration: 8n, mod1: 31, mod2: 74}
+      - null
+      - null
   - name: follow2
     steps:
-      - {pitch: 47, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
-      - {pitch: 54, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
       - null
-      - {pitch: 43, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
       - null
+      - null
+      - {pitch: 44, velocity: 76, duration: 8n, mod1: 87, mod2: 87}
+      - {pitch: 36, velocity: 57, duration: 8n, mod1: 107, mod2: 98}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 44, velocity: 24, duration: 8n, mod1: 25, mod2: 81}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 44, velocity: 120, duration: 8n, mod1: 36, mod2: 107}

@@ -18,7 +18,7 @@
  */
 const fs = require('fs');
 
-const { safeLoad } = require('js-yaml');
+const { safeLoad, safeDump } = require('js-yaml');
 
 const logger = require('./logger');
 
@@ -44,6 +44,19 @@ class StateFileWatcher {
       log.error(error);
     }
     return undefined/* null */;
+  }
+
+  writeFile(obj) {
+    const { filename, log } = this;
+    try {
+      const text = safeDump(obj, {
+        flowLevel: 4,
+        // sortKeys: true,
+      });
+      fs.writeFileSync(filename, text);
+    } catch (error) {
+      log.error(error);
+    }
   }
 
   constructor(filename, { schema, onLoad = () => {} }) {
