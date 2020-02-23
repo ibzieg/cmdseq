@@ -34,6 +34,7 @@ const PerformanceSchema = superstruct({
 })({
   controller: 'controller',
   instruments: ['instrument'],
+  loop: 'string?',
   scenes: ['scene'],
 });
 

@@ -4,6 +4,7 @@
 controller:
   device: IAC1
   channel: 7
+
 instruments:
   - name: mono1
     device: MOTU828x
@@ -15,6 +16,9 @@ instruments:
   - name: snare
     device: MOTU828x
     channel: 14
+
+loop: section1
+
 scenes:
   - name: intro
     repeat: 4
@@ -22,6 +26,9 @@ scenes:
       - name: kick
         master: true
         play: [A]
+
+#      - name: snare
+#        play: [half]
 
       - name: mono1
         play: [intro]

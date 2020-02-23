@@ -217,6 +217,7 @@ sequences:
   - name: follow1
     steps:
       - {pitch: 62, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
+      - null
       - {pitch: 54, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
       - {pitch: 66, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
       - null
@@ -225,5 +226,6 @@ sequences:
     steps:
       - {pitch: 47, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
       - {pitch: 54, velocity: 49, duration: 8n, mod1: 108, mod2: 31}
+      - null
       - {pitch: 43, velocity: 26, duration: 8n, mod1: 23, mod2: 31}
       - null

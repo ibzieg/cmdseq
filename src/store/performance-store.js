@@ -47,6 +47,11 @@ const selectInstruments = createSelector(
   (performanceState) => performanceState.instruments,
 );
 
+const selectLoop = createSelector(
+  selectPerformance,
+  (performanceState) => performanceState.loop,
+);
+
 const selectScenes = createSelector(
   selectPerformance,
   (performanceState) => performanceState.scenes,
@@ -57,5 +62,6 @@ module.exports = {
   ...performanceStore.actions,
   selectController,
   selectInstruments,
-  selectScenes
+  selectScenes,
+  selectLoop,
 };

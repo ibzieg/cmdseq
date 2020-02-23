@@ -50,7 +50,6 @@ class SequencePlayer {
   }
 
   reset() {
-    this.clockCount = 0;
     this.stepCount = 0;
     this.loopCount = 0;
     this.startCount = 0;
@@ -62,14 +61,9 @@ class SequencePlayer {
     this.startCount = 0;
   }
 
-  start() {
-    this.loopCount = 0;
-    this.stepCount = 0;
-    this.startCount = 0;
-  }
 
-  clock(playbackOptions, sequence, shouldLoop = true) {
-    const { clockCount } = this;
+  clock(clockCount, playbackOptions, sequence, shouldLoop = true) {
+    // const { clockCount } = this;
     const { rate, device, channel } = playbackOptions;
 
     const clockMod = Math.floor(PARTS_PER_QUANT / rate);
@@ -99,7 +93,7 @@ class SequencePlayer {
         }
       }
     }
-    this.clockCount += 1;
+    // this.clockCount += 1;
 
     return eventDidExecute;
   }

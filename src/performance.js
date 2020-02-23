@@ -31,6 +31,7 @@ const {
   putPerformance,
   selectController,
   selectInstruments,
+  selectLoop,
   selectScenes,
 } = require('./store/performance-store');
 const StateFileWatcher = require('./state-file-watcher');
@@ -55,7 +56,7 @@ let hasPerformanceFileLoaded = false;
 
 let stopCount = 0;
 let sceneIndex = 0;
-let repeatCount = 0;
+let clockCount = 0;
 
 // -----------------------------------------------------------------------------
 
@@ -181,13 +182,8 @@ function resetPlayers() {
   players.forEach((player) => player.reset());
 }
 
-function startPlayers() {
-  players.forEach((player) => player.start());
-}
-
 function reset() {
   sceneIndex = 0;
-  repeatCount = 0;
   resetPlayers();
 }
 
@@ -208,12 +204,19 @@ function midiStart() {
 
 function midiClock() {
   const state = store.getState();
+  const loopScene = selectLoop(state);
   const scenes = selectScenes(state);
   const tracks = selectTracks(state);
 
-  const scene = scenes[sceneIndex % scenes.length];
-  const { repeat } = scene;
+  let scene = scenes[sceneIndex % scenes.length];
+  if (loopScene) {
+    const findLoopScene = scenes.find((s) => s.name === loopScene);
+    if (findLoopScene) {
+      scene = findLoopScene;
+    }
+  }
 
+  const { repeat } = scene;
   let readyNextScene = false;
 
   const playTrack = (sceneTrack, launchNext = false) => {
@@ -228,7 +231,7 @@ function midiClock() {
     let eventDidExecute = false;
 
     const player = players.get(name);
-    if (player) {
+    if (player && !isEmpty(play)) {
       const seqNameIndex = player.loopCount;
       const seqName = play[seqNameIndex % play.length];
       const sequence = sequences.find((s) => s.name === seqName);
@@ -237,7 +240,7 @@ function midiClock() {
       if (launchNext) {
         player.next();
       }
-      eventDidExecute = player.clock(playback, sequence, shouldLoop);
+      eventDidExecute = player.clock(clockCount, playback, sequence, shouldLoop);
     }
 
     // Play any tracks that are following this one
@@ -263,8 +266,10 @@ function midiClock() {
 
   if (readyNextScene) {
     sceneIndex += 1;
-    startPlayers();
+    resetPlayers();
   }
+
+  clockCount += 1;
 }
 
 function setupStore() {
@@ -289,7 +294,6 @@ function setupMidi() {
     stop: midiStop,
   });
 }
-
 
 function performanceFileDidLoad() {
   setupMidi();
