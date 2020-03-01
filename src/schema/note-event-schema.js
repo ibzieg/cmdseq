@@ -24,7 +24,7 @@ const { isEmpty, isNumber } = require('lodash');
 const isMidiNumber = (value) => value >= 0 && value <= 127;
 const isMidiChannel = (value) => isNumber(value) && value >= 0 && value <= 16;
 
-const NoteEvent = superstruct({
+const NoteEventSchema = superstruct({
   types: {
     midiNumber: isMidiNumber,
   },
@@ -36,42 +36,16 @@ const NoteEvent = superstruct({
   mod2: 'midiNumber',
 });
 
-const isNoteEvent = (value) => {
-  const [error] = NoteEvent.validate(value);
+const isValidNoteEvent = (value) => {
+  const [error] = NoteEventSchema.validate(value);
   return isEmpty(error);
 };
 
 // -----------------------------------------------------------------------------
 
-function getRandomInt(min, max) {
-  const n = Math.random() * (max - min + 1) + min;
-  return Math.floor(n);
-}
-
-const MIN_VELOCITY = 24;
-const MAX_VELOCITY = 127;
-const MIN_CC_VALUE = 12;
-const MAX_CC_VALUE = 112;
-const DEFAULT_PITCH = 60;
-
-function makeRandomNoteEvent(options = {}) {
-  return {
-    pitch: DEFAULT_PITCH,
-    velocity: getRandomInt(MIN_VELOCITY, MAX_VELOCITY),
-    duration: '8n',
-    mod1: getRandomInt(MIN_CC_VALUE, MAX_CC_VALUE),
-    mod2: getRandomInt(MIN_CC_VALUE, MAX_CC_VALUE),
-    ...options,
-  };
-}
-
-// -----------------------------------------------------------------------------
-
 module.exports = {
-  NoteEvent,
+  NoteEventSchema,
   isMidiNumber,
   isMidiChannel,
-  isNoteEvent,
-  getRandomInt,
-  makeRandomNoteEvent,
+  isValidNoteEvent,
 };

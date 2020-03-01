@@ -16,33 +16,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const { superstruct } = require('superstruct');
-const { isEmpty } = require('lodash');
 
-const { isValidGenerator } = require('./generator-schema');
-const { isValidSequence } = require('./sequence-schema');
+function getRandomInt(min, max) {
+  const n = Math.random() * (max - min + 1) + min;
+  return Math.floor(n);
+}
 
-// -----------------------------------------------------------------------------
+const MIN_VELOCITY = 24;
+const MAX_VELOCITY = 127;
+const MIN_CC_VALUE = 12;
+const MAX_CC_VALUE = 112;
+const DEFAULT_PITCH = 60;
 
-const TrackSchema = superstruct({
-  types: {
-    generator: isValidGenerator,
-    sequence: isValidSequence,
-  },
-})({
-  name: 'string',
-  generator: 'generator',
-  sequences: ['sequence'],
-});
-
-const isValidTrack = (value) => {
-  const [error] = TrackSchema.validate(value);
-  return isEmpty(error);
-};
+function makeRandomNoteEvent(options = {}) {
+  return {
+    pitch: DEFAULT_PITCH,
+    velocity: getRandomInt(MIN_VELOCITY, MAX_VELOCITY),
+    duration: '8n',
+    mod1: getRandomInt(MIN_CC_VALUE, MAX_CC_VALUE),
+    mod2: getRandomInt(MIN_CC_VALUE, MAX_CC_VALUE),
+    ...options,
+  };
+}
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
-  TrackSchema,
-  isValidTrack,
+  getRandomInt,
+  makeRandomNoteEvent,
 };

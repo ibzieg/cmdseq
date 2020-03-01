@@ -19,7 +19,7 @@
  */
 const colors = require('colors');
 
-const logger = require('../logger');
+const logger = require('../support/logger');
 
 const MidiDevice = require('./midi-device');
 

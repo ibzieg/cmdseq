@@ -18,7 +18,7 @@
  */
 const colors = require('colors');
 
-const Screen = require('./screen');
+const Screen = require('../screen');
 
 // -----------------------------------------------------------------------------
 

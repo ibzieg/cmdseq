@@ -19,30 +19,42 @@
 const { superstruct } = require('superstruct');
 const { isEmpty } = require('lodash');
 
-const { isValidGenerator } = require('./generator-schema');
-const { isValidSequence } = require('./sequence-schema');
+const { isMidiNumber } = require('../schema/note-event-schema');
 
 // -----------------------------------------------------------------------------
 
-const TrackSchema = superstruct({
+const GeneratorType = {
+  quadrant: 'quadrant',
+  euclid: 'euclid',
+  eighth: 'eighth',
+  quarter: 'quarter',
+  half: 'half',
+  accel: 'accel',
+  ritard: 'ritard',
+};
+
+const isGeneratorType = (value) => !isEmpty(GeneratorType[value]);
+
+const GeneratorSchema = superstruct({
   types: {
-    generator: isValidGenerator,
-    sequence: isValidSequence,
+    generatorType: isGeneratorType,
+    midiNumber: isMidiNumber,
   },
 })({
-  name: 'string',
-  generator: 'generator',
-  sequences: ['sequence'],
+  length: 'number',
+  steps: 'number',
+  type: 'generatorType?',
+  notes: ['number'],
 });
 
-const isValidTrack = (value) => {
-  const [error] = TrackSchema.validate(value);
+const isValidGenerator = (value) => {
+  const [error] = GeneratorSchema.validate(value);
   return isEmpty(error);
 };
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
-  TrackSchema,
-  isValidTrack,
+  GeneratorSchema,
+  isValidGenerator,
 };

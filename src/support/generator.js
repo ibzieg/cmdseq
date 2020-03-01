@@ -16,48 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const { superstruct } = require('superstruct');
 const { isEmpty, reverse } = require('lodash');
 
-const { isMidiNumber, getRandomInt, makeRandomNoteEvent } = require('./midi-event');
-
-// -----------------------------------------------------------------------------
-
-const GeneratorType = {
-  quadrant: 'quadrant',
-  euclid: 'euclid',
-  eighth: 'eighth',
-  quarter: 'quarter',
-  half: 'half',
-  accel: 'accel',
-  ritard: 'ritard',
-};
-
-const isGeneratorType = value => !isEmpty(GeneratorType[value]);
-
-const Generator = superstruct({
-  types: {
-    generatorType: isGeneratorType,
-    midiNumber: isMidiNumber,
-  },
-})({
-  length: 'number',
-  steps: 'number',
-  type: 'generatorType?',
-  notes: ['number'],
-});
-
-const generatorDefaults = {
-  length: 16,
-  steps: 4,
-  type: 'quadrant',
-  notes: [36, 42, 48],
-};
-
-const isGenerator = value => {
-  const [error] = Generator.validate(value);
-  return isEmpty(error);
-};
+const { getRandomInt, makeRandomNoteEvent } = require('./midi-event');
 
 // -----------------------------------------------------------------------------
 
@@ -304,8 +265,5 @@ function generateSequence({
 // -----------------------------------------------------------------------------
 
 module.exports = {
-  Generator,
-  isGenerator,
-  generatorDefaults,
   generateSequence,
 };

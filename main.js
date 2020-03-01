@@ -21,7 +21,7 @@ const commander = require('commander');
 const app = require('./package.json');
 const Performance = require('./src/performance');
 const Screen = require('./src/screen');
-const logger = require('./src/logger');
+const logger = require('./src/support/logger');
 
 // -----------------------------------------------------------------------------
 

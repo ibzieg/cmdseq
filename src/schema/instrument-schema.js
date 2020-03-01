@@ -17,16 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const { superstruct } = require('superstruct');
-const { isEmpty, isNumber } = require('lodash');
+const { isEmpty } = require('lodash');
 
-const { isMidiNumber } = require('../midi-event');
+const { isMidiNumber, isMidiChannel } = require('./note-event-schema');
 
 // -----------------------------------------------------------------------------
 
 const InstrumentSchema = superstruct({
   types: {
     midiNumber: isMidiNumber,
-    midiChannel: (value) => isNumber(value) && value >= 0 && value <= 16,
+    midiChannel: isMidiChannel,
   },
 })({
   name: 'string',

@@ -21,7 +21,7 @@ const {
   combineReducers, configureStore, getDefaultMiddleware,
 } = require('@reduxjs/toolkit');
 
-const logger = require('../logger');
+const logger = require('../support/logger');
 
 const log = logger.create('store');
 

@@ -19,7 +19,7 @@
  */
 const midi = require('midi');
 
-const logger = require('../logger');
+const logger = require('../support/logger');
 
 const ExternalDevices = require('./external-devices');
 

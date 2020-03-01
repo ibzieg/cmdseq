@@ -33,13 +33,13 @@ const {
   selectLoop,
   selectScenes,
 } = require('./store/performance-store');
-const StateFileWatcher = require('./state-file-watcher');
+const StateFileWatcher = require('./support/state-file-watcher');
 const { TrackSchema } = require('./schema/track-schema');
 const { MidiController, MidiDevice } = require('./midi');
-const { generateSequence } = require('./generator');
-const SequencePlayer = require('./sequence-player');
+const { generateSequence } = require('./support/generator');
+const SequencePlayer = require('./support/sequence-player');
 const { PerformanceSchema } = require('./schema/performance-schema');
-const logger = require('./logger');
+const logger = require('./support/logger');
 
 // -----------------------------------------------------------------------------
 

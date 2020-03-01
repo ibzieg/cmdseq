@@ -19,8 +19,7 @@
 const { superstruct } = require('superstruct');
 const { isNull, isEmpty } = require('lodash');
 
-const { isMidiNumber, isNoteEvent } = require('../midi-event');
-
+const { isMidiNumber, isValidNoteEvent } = require('./note-event-schema');
 
 // -----------------------------------------------------------------------------
 
@@ -29,7 +28,7 @@ const isRate = (value) => value >= 1;
 const SequenceSchema = superstruct({
   types: {
     midiNumber: isMidiNumber,
-    noteEvent: (value) => isNull(value) || isNoteEvent(value),
+    noteEvent: (value) => isNull(value) || isValidNoteEvent(value),
     rate: isRate,
   },
 })({
