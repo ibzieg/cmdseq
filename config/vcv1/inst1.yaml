@@ -1,0 +1,32 @@
+name: inst1
+
+generator:
+  length: 16
+  steps: 4
+  type: quadrant
+  notes:
+    - 36
+    - 38
+    - 42
+    - 46
+
+sequences:
+  - name: A
+    rate: 4
+    steps:
+      - {pitch: 36, velocity: 123, duration: 8n, mod1: 51, mod2: 14}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 127, duration: 8n, mod1: 43, mod2: 107}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 50, duration: 8n, mod1: 95, mod2: 87}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 58, duration: 8n, mod1: 39, mod2: 19}
+      - null
+      - null
+      - null

@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+const commander = require('commander');
+
 const app = require('./package.json');
 const Performance = require('./src/performance');
 const Screen = require('./src/screen');
@@ -23,11 +25,20 @@ const logger = require('./src/logger');
 
 // -----------------------------------------------------------------------------
 
+const program = new commander.Command();
 const log = logger.create('main');
 
+// -----------------------------------------------------------------------------
 
 (function main() {
-  const perf = new Performance();
+  program.requiredOption('-p, --performance <filename>', 'Performance Yaml File');
+  program.parse(process.argv);
+
+  const perfOpts = {
+    filename: program.performance,
+  };
+
+  const perf = new Performance(perfOpts);
 
   Screen.create({
     onExit: () => {

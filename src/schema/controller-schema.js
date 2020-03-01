@@ -32,7 +32,7 @@ const ControllerSchema = superstruct({
   channel: 'midiChannel',
 });
 
-const isControllerSchema = (value) => {
+const isValidController = (value) => {
   const [error] = ControllerSchema.validate(value);
   return isEmpty(error);
 };
@@ -41,5 +41,5 @@ const isControllerSchema = (value) => {
 
 module.exports = {
   ControllerSchema,
-  isControllerSchema,
+  isValidController,
 };

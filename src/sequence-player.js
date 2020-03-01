@@ -62,9 +62,10 @@ class SequencePlayer {
   }
 
 
-  clock(clockCount, playbackOptions, sequence, shouldLoop = true) {
+  clock(clockCount, instrumentOptions, sequence, shouldLoop = true) {
     // const { clockCount } = this;
-    const { rate, device, channel } = playbackOptions;
+    const { device, channel } = instrumentOptions;
+    const { steps, rate } = sequence;
 
     const clockMod = Math.floor(PARTS_PER_QUANT / rate);
 
@@ -74,7 +75,6 @@ class SequencePlayer {
       const { stepCount } = this;
 
       if (shouldLoop || this.startCount === 0) {
-        const { steps } = sequence;
         const { length } = steps;
         const stepIndex = stepCount % length;
         const stepEvent = steps[stepIndex];

@@ -1,8 +1,5 @@
 name: snare
-playback:
-  device: MOTU828x
-  channel: 14
-  rate: 4
+
 generator:
   length: 16
   steps: 4
@@ -11,6 +8,7 @@ generator:
     - 38
 sequences:
   - name: A
+    rate: 4
     steps:
       - {pitch: 38, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
       - null
@@ -29,6 +27,7 @@ sequences:
       - null
       - null
   - name: B
+    rate: 4
     steps:
       - {pitch: 38, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
       - null
@@ -47,6 +46,7 @@ sequences:
       - null
       - null
   - name: half
+    rate: 4
     steps:
       - null
       - null
@@ -65,6 +65,7 @@ sequences:
       - null
       - null
   - name: myTest
+    rate: 4
     steps:
       - {pitch: 38, velocity: 49, duration: 8n, mod1: 89, mod2: 108}
       - null

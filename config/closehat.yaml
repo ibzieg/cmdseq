@@ -1,0 +1,47 @@
+name: closehat
+
+generator:
+  length: 16
+  steps: 14
+  type: euclid
+  notes:
+    - 42
+sequences:
+  - name: A
+    rate: 4
+    steps:
+      - {pitch: 42, velocity: 86, duration: 8n, mod1: 73, mod2: 89}
+      - null
+      - {pitch: 42, velocity: 40, duration: 8n, mod1: 90, mod2: 62}
+      - {pitch: 42, velocity: 31, duration: 8n, mod1: 85, mod2: 104}
+      - null
+      - {pitch: 42, velocity: 105, duration: 8n, mod1: 51, mod2: 101}
+      - {pitch: 42, velocity: 66, duration: 8n, mod1: 45, mod2: 87}
+      - null
+      - {pitch: 42, velocity: 124, duration: 8n, mod1: 35, mod2: 74}
+      - {pitch: 42, velocity: 96, duration: 8n, mod1: 109, mod2: 111}
+      - null
+      - {pitch: 42, velocity: 87, duration: 8n, mod1: 84, mod2: 21}
+      - {pitch: 42, velocity: 61, duration: 8n, mod1: 82, mod2: 94}
+      - null
+      - {pitch: 42, velocity: 39, duration: 8n, mod1: 100, mod2: 24}
+      - {pitch: 42, velocity: 25, duration: 8n, mod1: 58, mod2: 61}
+  - name: B
+    rate: 4
+    steps:
+      - {pitch: 42, velocity: 33, duration: 8n, mod1: 85, mod2: 23}
+      - null
+      - {pitch: 42, velocity: 82, duration: 8n, mod1: 108, mod2: 82}
+      - {pitch: 42, velocity: 117, duration: 8n, mod1: 55, mod2: 88}
+      - {pitch: 42, velocity: 97, duration: 8n, mod1: 94, mod2: 70}
+      - {pitch: 42, velocity: 28, duration: 8n, mod1: 29, mod2: 69}
+      - {pitch: 42, velocity: 30, duration: 8n, mod1: 22, mod2: 51}
+      - {pitch: 42, velocity: 72, duration: 8n, mod1: 83, mod2: 90}
+      - {pitch: 42, velocity: 49, duration: 8n, mod1: 59, mod2: 59}
+      - null
+      - {pitch: 42, velocity: 33, duration: 8n, mod1: 18, mod2: 71}
+      - {pitch: 42, velocity: 62, duration: 8n, mod1: 50, mod2: 53}
+      - {pitch: 42, velocity: 71, duration: 8n, mod1: 23, mod2: 49}
+      - {pitch: 42, velocity: 110, duration: 8n, mod1: 30, mod2: 20}
+      - {pitch: 42, velocity: 34, duration: 8n, mod1: 106, mod2: 30}
+      - {pitch: 42, velocity: 111, duration: 8n, mod1: 21, mod2: 43}

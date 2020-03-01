@@ -17,40 +17,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const { superstruct } = require('superstruct');
-const { isEmpty } = require('lodash');
+const { isNull, isEmpty } = require('lodash');
 
-const { isMidiNumber } = require('../midi-event');
+const { isMidiNumber, isNoteEvent } = require('../midi-event');
+
 
 // -----------------------------------------------------------------------------
 
-const PlaybackOptions = superstruct({
+const isRate = (value) => value >= 1;
+
+const SequenceSchema = superstruct({
   types: {
     midiNumber: isMidiNumber,
+    noteEvent: (value) => isNull(value) || isNoteEvent(value),
+    rate: isRate,
   },
 })({
-  device: 'string',
-  channel: 'number',
-  mute: 'boolean?',
-  rate: 'number',
-  follow: 'string?',
-  octave: 'number?',
-  cc1: 'midiNumber?', // midi cc #
-  cc2: 'midiNumber?', // midi cc #
+  name: 'string',
+  rate: 'rate',
+  steps: ['noteEvent?'],
 });
 
-const defaultPlaybackOptions = {
-  rate: 4,
-};
-
-const isPlaybackOptions = (value) => {
-  const [error] = PlaybackOptions.validate(value);
+const isValidSequence = (value) => {
+  const [error] = SequenceSchema.validate(value);
   return isEmpty(error);
 };
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
-  PlaybackOptions,
-  defaultPlaybackOptions,
-  isPlaybackOptions,
+  SequenceSchema,
+  isValidSequence,
 };

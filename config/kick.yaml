@@ -1,8 +1,5 @@
 name: kick
-playback:
-  device: MOTU828x
-  channel: 14
-  rate: 4
+
 generator:
   length: 16
   steps: 4
@@ -11,6 +8,7 @@ generator:
     - 36
 sequences:
   - name: A
+    rate: 4
     steps:
       - {pitch: 36, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
       - null
@@ -29,6 +27,7 @@ sequences:
       - null
       - null
   - name: B
+    rate: 4
     steps:
       - {pitch: 36, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
       - null
@@ -47,6 +46,7 @@ sequences:
       - null
       - null
   - name: quarter
+    rate: 4
     steps:
       - {pitch: 36, velocity: 93, duration: 8n, mod1: 98, mod2: 112}
       - null
@@ -65,20 +65,21 @@ sequences:
       - null
       - null
   - name: C
+    rate: 4
     steps:
       - null
-      - null
-      - {pitch: 36, velocity: 74, duration: 8n, mod1: 94, mod2: 63}
-      - null
-      - null
-      - null
-      - {pitch: 36, velocity: 82, duration: 8n, mod1: 69, mod2: 80}
-      - null
-      - {pitch: 36, velocity: 116, duration: 8n, mod1: 37, mod2: 32}
+      - {pitch: 36, velocity: 106, duration: 8n, mod1: 62, mod2: 43}
       - null
       - null
       - null
       - null
       - null
-      - {pitch: 36, velocity: 92, duration: 8n, mod1: 86, mod2: 66}
+      - {pitch: 36, velocity: 117, duration: 8n, mod1: 15, mod2: 24}
+      - null
+      - {pitch: 36, velocity: 127, duration: 8n, mod1: 84, mod2: 33}
+      - null
+      - null
+      - {pitch: 36, velocity: 119, duration: 8n, mod1: 103, mod2: 71}
+      - null
+      - null
       - null

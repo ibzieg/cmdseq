@@ -17,33 +17,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const { superstruct } = require('superstruct');
-const { isNull, isEmpty } = require('lodash');
+const { isEmpty } = require('lodash');
 
-const { isMidiNumber, isNoteEvent } = require('../midi-event');
+const { isGenerator } = require('../generator');
 
+const { isValidSequence } = require('./sequence-schema');
 
 // -----------------------------------------------------------------------------
 
-const Sequence = superstruct({
+const TrackSchema = superstruct({
   types: {
-    midiNumber: isMidiNumber,
-    noteEvent: (value) => isNull(value) || isNoteEvent(value),
+    generator: isGenerator,
+    sequence: isValidSequence,
   },
 })({
   name: 'string',
-  steps: ['noteEvent?'],
+  generator: 'generator',
+  sequences: ['sequence'],
 });
 
-const isSequence = (value) => {
-  const [error] = Sequence.validate(value);
+const isValidTrack = (value) => {
+  const [error] = TrackSchema.validate(value);
   return isEmpty(error);
 };
 
 // -----------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------
-
 module.exports = {
-  Sequence,
-  isSequence,
+  TrackSchema,
+  isValidTrack,
 };

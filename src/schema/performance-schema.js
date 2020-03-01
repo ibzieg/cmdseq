@@ -19,17 +19,17 @@
 const { superstruct } = require('superstruct');
 const { isEmpty } = require('lodash');
 
-const { isInstrumentSchema } = require('./instrument-schema');
-const { isSceneSchema } = require('./scene-schema');
-const { isControllerSchema } = require('./controller-schema');
+const { isValidInstrument } = require('./instrument-schema');
+const { isValidScene } = require('./scene-schema');
+const { isValidController } = require('./controller-schema');
 
 // -----------------------------------------------------------------------------
 
 const PerformanceSchema = superstruct({
   types: {
-    controller: isControllerSchema,
-    instrument: isInstrumentSchema,
-    scene: isSceneSchema,
+    controller: isValidController,
+    instrument: isValidInstrument,
+    scene: isValidScene,
   },
 })({
   controller: 'controller',
@@ -38,7 +38,7 @@ const PerformanceSchema = superstruct({
   scenes: ['scene'],
 });
 
-const isPerformanceConfig = (value) => {
+const isValidPerformance = (value) => {
   const [error] = PerformanceSchema.validate(value);
   return isEmpty(error);
 };
@@ -47,5 +47,5 @@ const isPerformanceConfig = (value) => {
 
 module.exports = {
   PerformanceSchema,
-  isPerformanceConfig,
+  isValidPerformance,
 };

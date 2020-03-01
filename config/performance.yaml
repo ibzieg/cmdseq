@@ -10,49 +10,139 @@ instruments:
     device: MOTU828x
     channel: 1
     quantize: true
+
+  - name: mono2
+    device: MOTU828x
+    channel: 2
+    quantize: true
+
   - name: kick
     device: MOTU828x
     channel: 14
+
   - name: snare
     device: MOTU828x
     channel: 14
 
-loop: section1
+  - name: openhat
+    device: MOTU828x
+    channel: 14
+
+  - name: closehat
+    device: MOTU828x
+    channel: 14
+
+loop: flw2
 
 scenes:
-  - name: intro
-    repeat: 4
-    tracks:
-      - name: kick
-        master: true
-        play: [A]
-
+#  - name: intro
+#    repeat: 4
+#    tracks:
+#      - name: kick
+#        master: true
+#        play: [A]
+#
+#      #      - name: snare
+##        play: [half]
+#
+#      - name: mono1
+#        play: [intro]
+#
+#  - name: transition
+#    repeat: 2
+#    tracks:
+#      - name: kick
+#        master: true
+#        play: [A]
+#
 #      - name: snare
 #        play: [half]
+#
+#  - name: section1
+#    repeat: 4
+#    tracks:
+#      - name: kick
+#        master: true
+#        play: [B, C]
+#
+#      - name: snare
+#        play: [half]
+#
+#      - name: mono1
+#        follow: kick
+#        play: [follow1, follow2]
+#
+#  - name: gabber
+#    repeat: 8
+#    tracks:
+#      - name: mono2
+#        play: [A, A, A, B]
+#
+#      - name: snare
+#        play: [half]
+#
+#      - name: openhat
+#        play: [A, A, A, B]
+#
+#      - name: closehat
+#        play: [A, A, A, B]
 
-      - name: mono1
-        play: [intro]
-
-  - name: transition
-    repeat: 2
-    tracks:
-      - name: kick
-        master: true
-        play: [A]
-
-      - name: snare
-        play: [half]
-
-  - name: section1
+  - name: flw
     repeat: 4
     tracks:
-      - name: kick
-        master: true
-        play: [B, C]
+      - name: mono1
+        play: [follow1]
+
+      - name: mono2
+        play: [C, D]
+
+      - name: openhat
+        follow: mono2
+        play: [A, A, A, B]
+
+      - name: closehat
+        follow: mono2
+        play: [A, A, A, B]
+
+  - name: flw1
+    repeat: 8
+    tracks:
+      - name: mono1
+        play: [follow1]
+
+      - name: mono2
+        play: [C, D]
 
       - name: snare
+        follow: mono2
+        play: [myTest]
+
+      - name: openhat
+        follow: mono2
+        play: [A, A, A, B]
+
+      - name: closehat
+        follow: mono2
+        play: [A, A, A, B]
+
+  - name: flw2
+    repeat: 8
+    tracks:
+      - name: mono1
+        play: [follow1]
+
+      - name: mono2
+        play: [C, D]
+
+      - name: snare
+        # follow: mono2
+        # play: [myTest]
         play: [half]
 
-      - name: mono1
-        follow: kick
-        play: [follow1, follow2]
+      - name: openhat
+        follow: mono2
+        play: [A, A, A, B]
+
+      - name: closehat
+        follow: mono2
+        play: [A, A, A, B]

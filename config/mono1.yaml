@@ -1,8 +1,5 @@
 name: mono1
-playback:
-  device: MOTU828x
-  channel: 1
-  rate: 4
+
 generator:
   length: 16
   steps: 4
@@ -15,6 +12,7 @@ generator:
     - 44
 sequences:
   - name: intro
+    rate: 4
     steps:
       - {pitch: 42, velocity: 110, duration: 8n, mod1: 82, mod2: 60}
       - null
@@ -49,6 +47,7 @@ sequences:
       - null
       - null
   - name: A
+    rate: 4
     steps:
       - {pitch: 48, velocity: 115, duration: 8n, mod1: 67, mod2: 81}
       - null
@@ -67,6 +66,7 @@ sequences:
       - null
       - null
   - name: B
+    rate: 4
     steps:
       - {pitch: 60, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
       - null
@@ -85,6 +85,7 @@ sequences:
       - null
       - null
   - name: C
+    rate: 4
     steps:
       - {pitch: 48, velocity: 44, duration: 8n, mod1: 17, mod2: 52}
       - null
@@ -103,6 +104,7 @@ sequences:
       - null
       - null
   - name: quarter
+    rate: 4
     steps:
       - {pitch: 36, velocity: 93, duration: 8n, mod1: 98, mod2: 112}
       - null
@@ -121,6 +123,7 @@ sequences:
       - null
       - null
   - name: half
+    rate: 4
     steps:
       - null
       - null
@@ -139,6 +142,7 @@ sequences:
       - null
       - null
   - name: eighth
+    rate: 4
     steps:
       - null
       - {pitch: 36, velocity: 106, duration: 8n, mod1: 94, mod2: 23}
@@ -157,6 +161,7 @@ sequences:
       - null
       - {pitch: 48, velocity: 116, duration: 8n, mod1: 68, mod2: 107}
   - name: euclid8
+    rate: 4
     steps:
       - {pitch: 36, velocity: 103, duration: 8n, mod1: 29, mod2: 51}
       - null
@@ -175,6 +180,7 @@ sequences:
       - {pitch: 42, velocity: 48, duration: 8n, mod1: 90, mod2: 50}
       - null
   - name: accel
+    rate: 4
     steps:
       - {pitch: 48, velocity: 48, duration: 8n, mod1: 87, mod2: 87}
       - null
@@ -193,6 +199,7 @@ sequences:
       - {pitch: 48, velocity: 100, duration: 8n, mod1: 104, mod2: 82}
       - {pitch: 48, velocity: 111, duration: 8n, mod1: 90, mod2: 69}
   - name: ritard
+    rate: 4
     steps:
       - {pitch: 42, velocity: 86, duration: 8n, mod1: 107, mod2: 102}
       - {pitch: 48, velocity: 26, duration: 8n, mod1: 46, mod2: 65}
@@ -211,6 +218,7 @@ sequences:
       - {pitch: 48, velocity: 33, duration: 8n, mod1: 71, mod2: 65}
       - null
   - name: follow1
+    rate: 4
     steps:
       - {pitch: 36, velocity: 58, duration: 8n, mod1: 66, mod2: 29}
       - null
@@ -229,6 +237,7 @@ sequences:
       - null
       - null
   - name: follow2
+    rate: 4
     steps:
       - null
       - null

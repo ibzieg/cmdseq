@@ -1,0 +1,85 @@
+name: mono2
+
+generator:
+  length: 16
+  steps: 4
+  type: quadrant
+  notes:
+    - 36
+sequences:
+  - name: A
+    rate: 4
+    steps:
+      - {pitch: 36, velocity: 123, duration: 8n, mod1: 51, mod2: 14}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 127, duration: 8n, mod1: 43, mod2: 107}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 50, duration: 8n, mod1: 95, mod2: 87}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 58, duration: 8n, mod1: 39, mod2: 19}
+      - null
+      - null
+      - null
+  - name: B
+    rate: 4
+    steps:
+      - {pitch: 36, velocity: 123, duration: 8n, mod1: 51, mod2: 14}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 127, duration: 8n, mod1: 43, mod2: 107}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 50, duration: 8n, mod1: 95, mod2: 87}
+      - null
+      - {pitch: 40, velocity: 50, duration: 8n, mod1: 95, mod2: 87}
+      - null
+      - {pitch: 36, velocity: 58, duration: 8n, mod1: 39, mod2: 19}
+      - {pitch: 36, velocity: 58, duration: 8n, mod1: 39, mod2: 19}
+      - {pitch: 36, velocity: 58, duration: 8n, mod1: 39, mod2: 19}
+      - null
+  - name: C
+    rate: 4
+    steps:
+      - null
+      - {pitch: 36, velocity: 116, duration: 8n, mod1: 26, mod2: 40}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 81, duration: 8n, mod1: 86, mod2: 20}
+      - {pitch: 36, velocity: 107, duration: 8n, mod1: 50, mod2: 39}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 97, duration: 8n, mod1: 104, mod2: 106}
+      - null
+      - null
+      - null
+  - name: D
+    rate: 4
+    steps:
+      - null
+      - {pitch: 36, velocity: 114, duration: 8n, mod1: 78, mod2: 57}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 24, duration: 8n, mod1: 19, mod2: 61}
+      - null
+      - null
+      - {pitch: 36, velocity: 36, duration: 8n, mod1: 76, mod2: 85}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 111, duration: 8n, mod1: 16, mod2: 51}
+      - null
+      - null

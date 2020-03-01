@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const fs = require('fs');
+const { dirname } = require('path');
 
-const { safeDump } = require('js-yaml');
 const { first, isEmpty } = require('lodash');
 
 const store = require('./store');
@@ -35,90 +34,33 @@ const {
   selectScenes,
 } = require('./store/performance-store');
 const StateFileWatcher = require('./state-file-watcher');
-const { TrackConfig } = require('./schema/track-config');
+const { TrackSchema } = require('./schema/track-schema');
 const { MidiController, MidiDevice } = require('./midi');
-const { generatorDefaults, generateSequence } = require('./generator');
+const { generateSequence } = require('./generator');
 const SequencePlayer = require('./sequence-player');
 const { PerformanceSchema } = require('./schema/performance-schema');
 const logger = require('./logger');
+
+// -----------------------------------------------------------------------------
 
 const log = logger.create('config');
 
 // -----------------------------------------------------------------------------
 
-const performanceDir = 'config';
-const performanceName = 'performance';
-
-
-// -----------------------------------------------------------------------------
-
-// eslint-disable-next-line no-unused-vars
-function writeDefaultConfig() {
-  let track = {};
-  try {
-    track = TrackConfig({
-      playback: {
-        rate: 4,
-      },
-      generator: generatorDefaults,
-      sequences: [
-        {
-          name: 'intro',
-          steps: generateSequence(generatorDefaults),
-        },
-        {
-          name: 'A',
-          steps: generateSequence({ ...generatorDefaults, type: 'euclid', steps: 5 }),
-        },
-        {
-          name: 'B',
-          steps: generateSequence({ ...generatorDefaults, type: 'euclid', steps: 6 }),
-        },
-        {
-          name: 'quarter',
-          steps: generateSequence({ ...generatorDefaults, type: 'quarter' }),
-        },
-        {
-          name: 'half',
-          steps: generateSequence({ ...generatorDefaults, type: 'half' }),
-        },
-        {
-          name: 'eighth',
-          steps: generateSequence({ ...generatorDefaults, type: 'eighth' }),
-        },
-        {
-          name: 'euclid8',
-          steps: generateSequence({ ...generatorDefaults, type: 'euclid', steps: 8 }),
-        },
-        {
-          name: 'accel',
-          steps: generateSequence({ ...generatorDefaults, type: 'accel', steps: 4 }),
-        },
-        {
-          name: 'ritard',
-          steps: generateSequence({ ...generatorDefaults, type: 'ritard', steps: 4 }),
-        },
-      ],
-    });
-  } catch (error) {
-    log.error('Error generating default track:');
-    log.error(error);
-  }
-
-  const yaml = safeDump(track, {
-    flowLevel: 4,
-    // sortKeys: true,
-  });
-  fs.writeFileSync('./output.yaml', yaml);
-}
-
-
-function getInstrumentFileName(name) {
-  return `${performanceDir}/${name}.yaml`;
-}
 
 class Performance {
-  constructor() {
+  get directory() {
+    return dirname(this.filename);
+  }
+
+  get filename() {
+    const { filename } = this.options;
+    return filename;
+  }
+
+  constructor(options) {
+    this.options = { ...options };
+
     this.watchers = new Map();
     this.players = new Map();
 
@@ -129,11 +71,13 @@ class Performance {
     this.clockCount = 0;
   }
 
+  getInstrumentFileName(name) {
+    return `${this.directory}/${name}.yaml`;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   handleStoreStateChange() {
-    // const state = store.getState();
-    // const firstTrack = selectFirstTrack(state);
-    // log.debug(firstTrack.sequences[0].name);
+    // Do something when the store state changes
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -193,10 +137,10 @@ class Performance {
   }
 
   watchPerformanceConfig() {
-    const name = performanceName;
+    const name = this.filename;
     if (!this.watchers.has(name)) {
       this.watchers.set(name, new StateFileWatcher(
-        getInstrumentFileName(name), {
+        this.filename, {
           schema: PerformanceSchema,
           onLoad: (config) => this.handlePerformanceFileChange(config),
         },
@@ -211,8 +155,8 @@ class Performance {
 
       if (!this.watchers.has(name)) {
         this.watchers.set(name, new StateFileWatcher(
-          getInstrumentFileName(name), {
-            schema: TrackConfig,
+          this.getInstrumentFileName(name), {
+            schema: TrackSchema,
             onLoad: (config) => this.handleTrackFileChange(config),
           },
         ));
@@ -252,6 +196,7 @@ class Performance {
     const state = store.getState();
     const loopScene = selectLoop(state);
     const scenes = selectScenes(state);
+    const instruments = selectInstruments(state);
     const tracks = selectTracks(state);
 
     let scene = scenes[this.sceneIndex % scenes.length];
@@ -272,12 +217,13 @@ class Performance {
       if (!tracks[name]) {
         return;
       }
-      const { playback, sequences } = tracks[name];
+      const { sequences } = tracks[name];
 
       let eventDidExecute = false;
 
       const player = this.players.get(name);
-      if (player && !isEmpty(play)) {
+      const instrument = instruments.find((inst) => inst.name === name);
+      if (instrument && player && !isEmpty(play)) {
         const seqNameIndex = player.loopCount;
         const seqName = play[seqNameIndex % play.length];
         const sequence = sequences.find((s) => s.name === seqName);
@@ -286,7 +232,9 @@ class Performance {
         if (launchNext) {
           player.next();
         }
-        eventDidExecute = player.clock(this.clockCount, playback, sequence, shouldLoop);
+
+        // Send Clock event to player
+        eventDidExecute = player.clock(this.clockCount, instrument, sequence, shouldLoop);
       }
 
       // Play any tracks that are following this one

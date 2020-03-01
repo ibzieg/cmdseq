@@ -1,0 +1,15 @@
+controller:
+  device: IAC1
+  channel: 7
+
+instruments:
+  - name: inst1
+    device: MOTU828x
+    channel: 14
+
+scenes:
+  - name: default
+    repeat: 16
+    tracks:
+      - name: inst1
+        play: [A]

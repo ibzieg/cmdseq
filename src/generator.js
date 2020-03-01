@@ -25,7 +25,7 @@ const { isMidiNumber, getRandomInt, makeRandomNoteEvent } = require('./midi-even
 
 const GeneratorType = {
   quadrant: 'quadrant',
-  eculid: 'euclid',
+  euclid: 'euclid',
   eighth: 'eighth',
   quarter: 'quarter',
   half: 'half',

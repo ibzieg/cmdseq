@@ -34,11 +34,6 @@ const isSceneTrack = (value) => {
   return isEmpty(error);
 };
 
-/* const isTrackSet = (trackSet) => Object.keys(trackSet).reduce((isValid, trackName) => {
-  const sceneTrack = trackSet[trackName];
-  return isSceneTrack(sceneTrack) && isValid;
-}, true); */
-
 // -----------------------------------------------------------------------------
 
 const SceneSchema = superstruct({
@@ -51,7 +46,7 @@ const SceneSchema = superstruct({
   tracks: ['sceneTrack'],
 });
 
-const isSceneSchema = (value) => {
+const isValidScene = (value) => {
   const [error] = SceneSchema.validate(value);
   return isEmpty(error);
 };
@@ -60,5 +55,5 @@ const isSceneSchema = (value) => {
 
 module.exports = {
   SceneSchema,
-  isSceneSchema,
+  isValidScene,
 };

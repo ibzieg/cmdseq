@@ -19,10 +19,13 @@
 const { superstruct } = require('superstruct');
 const { isEmpty, isNumber } = require('lodash');
 
+const { isMidiNumber } = require('../midi-event');
+
 // -----------------------------------------------------------------------------
 
 const InstrumentSchema = superstruct({
   types: {
+    midiNumber: isMidiNumber,
     midiChannel: (value) => isNumber(value) && value >= 0 && value <= 16,
   },
 })({
@@ -30,18 +33,18 @@ const InstrumentSchema = superstruct({
   device: 'string',
   channel: 'midiChannel',
   quantize: 'boolean?',
+  cc1: 'midiNumber?',
+  cc2: 'midiNumber?',
 });
 
-const isInstrumentSchema = (value) => {
+const isValidInstrument = (value) => {
   const [error] = InstrumentSchema.validate(value);
   return isEmpty(error);
 };
 
 // -----------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------
-
 module.exports = {
   InstrumentSchema,
-  isInstrumentSchema,
+  isValidInstrument,
 };
