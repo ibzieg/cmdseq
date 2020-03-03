@@ -25,7 +25,7 @@ const store = require('./store');
 const {
   putTrack,
   selectTracks,
-} = require('./store/tracks');
+} = require('./store/tracks-store');
 const {
   putPerformance,
   selectController,

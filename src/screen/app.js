@@ -22,9 +22,7 @@ const EventEmitter = require('events');
 const React = require('react');
 const PropTypes = require('prop-types');
 
-const requireJsx = require('./require-jsx');
-
-const PerformanceController = requireJsx(`${__dirname}/PerformanceController.jsx`);
+const PerformanceController = require('./performance-controller');
 
 // -----------------------------------------------------------------------------
 
@@ -60,17 +58,15 @@ class App extends React.Component {
     const { data, scene, log } = this.state;
     const { onCommandInput, onFunctionKey, onExit } = this.props;
 
-    return (
-      <PerformanceController
-        data={data}
-        scene={scene}
-        log={log}
-        emitter={this.eventEmitter}
-        onCommandInput={onCommandInput}
-        onFunctionKey={onFunctionKey}
-        onExit={onExit}
-      />
-    );
+    return React.createElement(PerformanceController, {
+      data,
+      scene,
+      log,
+      emitter: this.eventEmitter,
+      onCommandInput,
+      onFunctionKey,
+      onExit,
+    });
   }
 }
 

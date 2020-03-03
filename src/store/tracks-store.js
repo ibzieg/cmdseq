@@ -18,9 +18,9 @@
  */
 const { createSlice } = require('@reduxjs/toolkit');
 const { createSelector } = require('reselect');
-const { first, values } = require('lodash');
+const { first } = require('lodash');
 
-const tracks = createSlice({
+const tracksStore = createSlice({
   name: 'tracks',
   initialState: {},
   reducers: {
@@ -58,8 +58,8 @@ const selectFirstTrack = createSelector(
 );
 
 module.exports = {
-  tracks,
-  ...tracks.actions,
+  tracks: tracksStore,
+  ...tracksStore.actions,
   selectFirstTrack,
   selectTracks,
 };

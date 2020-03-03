@@ -88,62 +88,60 @@ class CommandBox extends React.Component {
       commandHistory,
     } = this.state;
     const { commandInput } = this.refs;
-    return (
-      <box
-        top={top}
-        left={left}
-        width={width}
-        height={height}
-        style={{
+    return React.createElement('box', {
+      top,
+      left,
+      width,
+      height,
+      style: {
+        border: { fg: 'white' },
+      },
+    },
+    [
+      React.createElement('box', {
+        ref: 'log',
+        top: 0,
+        left: 0,
+        scrollable: true,
+        width,
+        height: height - 3,
+        border: { type: 'line' },
+        style: {
           border: { fg: 'white' },
-        }}
-      >
-        <box
-          ref="log"
-          top={0}
-          left={0}
-          scrollable
-          width={width}
-          height={height - 3}
-          border={{ type: 'line' }}
-          style={{
-            border: { fg: 'white' },
-          }}
-        />
-        <textbox
-          top={height - 4}
-          left={0}
-          width={width}
-          height={3}
-          ref="commandInput"
-          scrollable
-          inputOnFocus
-          keys
-          mouse
-          border={{ type: 'line' }}
-          style={{
-            border: { fg: 'white' },
-          }}
-          onKeypress={this.handleKeypress.bind(this)}
-          onSubmit={(value) => {
-            commandInput.clearValue();
-            commandInput.focus();
-            if (value === 'exit') {
-              onExit();
-            } else {
-              if (onCommandInput) {
-                onCommandInput(value);
-              }
-              this.setState({
-                commandHistory: [...commandHistory, value],
-                commandHistoryIndex: commandHistory.length + 1,
-              });
+        },
+      }),
+      React.createElement('textbox', {
+        top: height - 4,
+        left: 0,
+        width,
+        height: 3,
+        ref: 'commandInput',
+        scrollable: true,
+        inputOnFocus: true,
+        keys: true,
+        mouse: true,
+        border: { type: 'line' },
+        style: {
+          border: { fg: 'white' },
+        },
+        onKeypress: this.handleKeypress.bind(this),
+        onSubmit: (value) => {
+          commandInput.clearValue();
+          commandInput.focus();
+          if (value === 'exit') {
+            onExit();
+          } else {
+            if (onCommandInput) {
+              onCommandInput(value);
             }
-          }}
-        />
-
-      </box>
-    );
+            this.setState({
+              commandHistory: [...commandHistory, value],
+              commandHistoryIndex: commandHistory.length + 1,
+            });
+          }
+        },
+      }),
+    ]);
   }
 }
 

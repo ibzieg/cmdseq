@@ -19,47 +19,57 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-const requireJsx = require('./require-jsx');
-
-const CommandBox = requireJsx(`${__dirname}/CommandBox.jsx`);
+const CommandBox = require(`./command-box`);
 
 // -----------------------------------------------------------------------------
 
-// const SCREEN_HEIGHT = 30;
 const SCREEN_WIDTH = 100;
 
 // -----------------------------------------------------------------------------
 
 function PerformanceController({
-  log, onCommandInput, onFunctionKey, onExit, emitter,
+  log,
+  onCommandInput,
+  onFunctionKey,
+  onExit,
+  emitter,
 }) {
-  return (
-    <element>
-      <box
-        top={0}
-        left={0}
-        width={SCREEN_WIDTH - 2}
-        height={3}
-        border={{ type: 'line' }}
-        style={{
-          border: { fg: 'magenta' },
-        }}
-      >
-        {' cmdseq'}
-      </box>
-
-      <CommandBox
-        top={3}
-        left={0}
-        height={32}
-        width={SCREEN_WIDTH - 2}
-        log={log}
-        emitter={emitter}
-        onCommandInput={onCommandInput}
-        onFunctionKey={onFunctionKey}
-        onExit={onExit}
-      />
-    </element>
+  const statusText = ' cmdseq';
+  return React.createElement(
+    "element",
+    null,
+    React.createElement(
+      "box",
+      {
+        top: 0,
+        left: 0,
+        width: SCREEN_WIDTH - 2,
+        height: 3,
+        border: {
+          type: 'line'
+        },
+        style: {
+          border: {
+            fg: 'magenta'
+          }
+        }
+      },
+      statusText,
+    ),
+    React.createElement(
+      CommandBox,
+      {
+        top: 3,
+        left: 0,
+        height: 32,
+        width: SCREEN_WIDTH - 2,
+        log,
+        emitter,
+        onCommandInput,
+        onFunctionKey,
+        onExit,
+      }
+    ),
   );
 }
 

@@ -25,7 +25,7 @@ const logger = require('../support/logger');
 
 const log = logger.create('store');
 
-const { tracks } = require('./tracks');
+const { tracks } = require('./tracks-store');
 const { performance } = require('./performance-store');
 
 function actionLog({ getState }) {

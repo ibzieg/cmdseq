@@ -21,9 +21,7 @@ const React = require('react');
 const blessed = require('blessed');
 const { render } = require('react-blessed');
 
-const requireJsx = require('./require-jsx');
-
-const App = requireJsx(`${__dirname}/App.jsx`);
+const App = require('./app');
 
 // -----------------------------------------------------------------------------
 
@@ -68,11 +66,12 @@ class Screen {
     });
 
     this.appComponent = render(
-      <App
-        onCommandInput={onCommandInput}
-        onFunctionKey={onFunctionKey}
-        onExit={handleOnExit}
-      />, screen,
+      React.createElement(App, {
+        onCommandInput,
+        onFunctionKey,
+        onExit: handleOnExit,
+      }),
+      screen,
     );
   }
 

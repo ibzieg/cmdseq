@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const requireJsx = require('./require-jsx');
-
-const Screen = requireJsx(`${__dirname}/Screen.jsx`);
+const Screen = require('./screen');
 
 module.exports = Screen;

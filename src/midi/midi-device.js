@@ -54,21 +54,11 @@ class MidiDevice {
     }
   }
 
+  // eslint-disable-next-line consistent-return
   static getInstance(deviceOptions) {
-    // eslint-disable-next-line consistent-return
-/*    Object.keys(ExternalDevices.devices).forEach((deviceKey) => {
-      const device = ExternalDevices.devices[deviceKey];
-      if (device.names[0] === deviceOptions.names[0]) {
-        let deviceInstance = MidiDevice.deviceInstances[deviceKey];
-        if (!(deviceInstance instanceof MidiDevice)) {
-          deviceInstance = new MidiDevice(deviceOptions);
-          deviceInstance.open();
-          MidiDevice.deviceInstances[deviceKey] = deviceInstance;
-        }
-        return deviceInstance;
-      }
-    });*/
+    // eslint-disable-next-line consistent-return,no-restricted-syntax,prefer-const
     for (let deviceKey of Object.keys(ExternalDevices.devices)) {
+      // eslint-disable-next-line prefer-const
       let device = ExternalDevices.devices[deviceKey];
       if (device.names[0] === deviceOptions.names[0]) {
         let deviceInstance = MidiDevice._deviceInstances[deviceKey];
@@ -80,8 +70,6 @@ class MidiDevice {
         return deviceInstance;
       }
     }
-
-
   }
 
   get options() {
