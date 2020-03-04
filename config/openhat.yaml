@@ -6,6 +6,7 @@ generator:
   type: euclid
   notes:
     - 39
+
 sequences:
   - name: B
     rate: 4

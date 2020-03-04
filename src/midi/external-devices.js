@@ -26,10 +26,16 @@ const devices = {
     ],
   },
   Minilogue: {
-    names: ['minilogue SOUND', 'minilogue 24:1', 'minilogue 28:1'],
+    names: [
+      'minilogue SOUND',
+      'minilogue 24:1',
+      'minilogue 28:1',
+    ],
   },
   MOTU828x: {
-    names: ['828x MIDI Port'],
+    names: [
+      '828x MIDI Port',
+    ],
   },
   Midisport: {
     names: [
@@ -44,77 +50,6 @@ const devices = {
   },
 };
 
-/** *
- *
- */
-const instruments = {
-  UnoBSPSeq1: {
-    device: devices.Midisport,
-    channel: 1,
-  },
-  UnoBSPSeq2: {
-    device: devices.Midisport,
-    channel: 2,
-  },
-  UnoBSPDrum: {
-    device: devices.Midisport,
-    channel: 14,
-  },
-  BSPSeq1: {
-    device: devices.BeatStepPro,
-    channel: 1,
-  },
-  BSPSeq2: {
-    device: devices.BeatStepPro,
-    channel: 2,
-  },
-  BSPDrum: {
-    device: devices.BeatStepPro,
-    channel: 14,
-  },
-  Minilogue: {
-    device: devices.Minilogue,
-    channel: 1,
-  },
-  UnoKorg: {
-    device: devices.Midisport,
-    channel: 12,
-  },
-  Juno106: {
-    device: devices.Midisport,
-    channel: 13,
-  },
-  NordG2A: {
-    device: devices.Midisport,
-    channel: 7,
-  },
-  IAC1ch1: {
-    device: devices.IAC1,
-    channel: 1,
-  },
-  IAC1ch2: {
-    device: devices.IAC1,
-    channel: 2,
-  },
-  IAC1drum: {
-    device: devices.IAC1,
-    channel: 14,
-  },
-};
-
-const drumMap = [
-  36,
-  38,
-  39,
-  42,
-  46,
-  49,
-  75,
-  67,
-];
-
 module.exports = {
   devices,
-  instruments,
-  drumMap,
 };

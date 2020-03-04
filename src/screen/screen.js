@@ -27,8 +27,6 @@ const App = require('./app');
 
 let _instance;
 
-// -----------------------------------------------------------------------------
-
 class Screen {
   static get instance() {
     return _instance;
@@ -60,7 +58,6 @@ class Screen {
       title: 'cmdseq',
     });
 
-    // eslint-disable-next-line no-unused-vars
     screen.key(['escape', 'q', 'C-c'], (ch, key) => {
       handleOnExit();
     });

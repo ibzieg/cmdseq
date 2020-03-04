@@ -18,7 +18,7 @@
  */
 const { isEmpty, reverse } = require('lodash');
 
-const { getRandomInt, makeRandomNoteEvent } = require('./midi-event');
+const { getRandomInt, makeRandomNoteEvent } = require('./midi-data');
 
 // -----------------------------------------------------------------------------
 

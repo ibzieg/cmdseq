@@ -19,7 +19,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-const CommandBox = require(`./command-box`);
+const CommandBox = require('./command-box');
 
 // -----------------------------------------------------------------------------
 
@@ -36,23 +36,23 @@ function PerformanceController({
 }) {
   const statusText = ' cmdseq';
   return React.createElement(
-    "element",
-    null,
+    'element',
+    undefined,
     React.createElement(
-      "box",
+      'box',
       {
         top: 0,
         left: 0,
         width: SCREEN_WIDTH - 2,
         height: 3,
         border: {
-          type: 'line'
+          type: 'line',
         },
         style: {
           border: {
-            fg: 'magenta'
-          }
-        }
+            fg: 'magenta',
+          },
+        },
       },
       statusText,
     ),
@@ -68,16 +68,14 @@ function PerformanceController({
         onCommandInput,
         onFunctionKey,
         onExit,
-      }
+      },
     ),
   );
 }
 
 PerformanceController.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  log: PropTypes.any.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  emitter: PropTypes.any.isRequired,
+  log: PropTypes.shape({}).isRequired,
+  emitter: PropTypes.shape({}).isRequired,
   onCommandInput: PropTypes.func.isRequired,
   onExit: PropTypes.func.isRequired,
   onFunctionKey: PropTypes.func.isRequired,

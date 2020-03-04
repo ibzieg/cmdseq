@@ -19,6 +19,8 @@
 const { createSlice } = require('@reduxjs/toolkit');
 const { createSelector } = require('reselect');
 
+// -----------------------------------------------------------------------------
+
 const performanceStore = createSlice({
   name: 'performance',
   initialState: {},
@@ -34,6 +36,8 @@ const performanceStore = createSlice({
     },
   },
 });
+
+// -----------------------------------------------------------------------------
 
 const selectPerformance = (state) => state.performance;
 
@@ -56,6 +60,8 @@ const selectScenes = createSelector(
   selectPerformance,
   (performanceState) => performanceState.scenes,
 );
+
+// -----------------------------------------------------------------------------
 
 module.exports = {
   performance: performanceStore,

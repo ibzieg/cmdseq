@@ -153,61 +153,6 @@ class MidiController {
   }
 }
 
-const BeatStepControllerMap = {
-  Knob1: 10,
-  Knob2: 74,
-  Knob3: 71,
-  Knob4: 76,
-  Knob5: 77,
-  Knob6: 93,
-  Knob7: 73,
-  Knob8: 75,
-  Knob9: 114,
-  Knob10: 18,
-  Knob11: 19,
-  Knob12: 16,
-  Knob13: 17,
-  Knob14: 91,
-  Knob15: 79,
-  Knob16: 72,
-
-  Pad1: 36,
-  Pad2: 37,
-  Pad3: 38,
-  Pad4: 39,
-  Pad5: 40,
-  Pad6: 41,
-  Pad7: 42,
-  Pad8: 43,
-  Pad9: 44,
-  Pad10: 45,
-  Pad11: 46,
-  Pad12: 47,
-  Pad13: 48,
-  Pad14: 49,
-  Pad15: 50,
-  Pad16: 51,
-
-  Stage1: 20,
-  Stage2: 21,
-  Stage3: 22,
-  Stage4: 23,
-  Stage5: 24,
-  Stage6: 25,
-  Stage7: 26,
-  Stage8: 27,
-  Stage9: 28,
-  Stage10: 29,
-  Stage11: 30,
-  Stage12: 31,
-  Stage13: 52,
-  Stage14: 53,
-  Stage15: 54,
-  Stage16: 55,
-};
-
-MidiController.BeatStepMap = BeatStepControllerMap;
-
 // -----------------------------------------------------------------------------
 
 module.exports = MidiController;

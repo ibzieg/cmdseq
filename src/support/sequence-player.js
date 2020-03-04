@@ -25,8 +25,6 @@ const logger = require('./logger');
 
 const PARTS_PER_QUANT = 48;
 
-
-// eslint-disable-next-line no-unused-vars
 const log = logger.create('player');
 
 // -----------------------------------------------------------------------------
@@ -34,7 +32,6 @@ const log = logger.create('player');
 function runStepEvent(stepEvent, midiInstrument) {
   if (stepEvent && midiInstrument) {
     const {
-      // eslint-disable-next-line no-unused-vars
       pitch, velocity, duration, mod1, mod2,
     } = stepEvent;
     midiInstrument.play(pitch, velocity, 100);

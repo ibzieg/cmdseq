@@ -34,7 +34,6 @@ class StateFileWatcher {
       if (error) {
         const message = `Failed to load. Expected type '${error.type}' at '${error.path}'`;
         log.error(message);
-        // console.log(error);
       } else {
         log.confirm('Loaded from disk');
         this.onLoad(data);
@@ -43,7 +42,7 @@ class StateFileWatcher {
     } catch (error) {
       log.error(error);
     }
-    return undefined/* null */;
+    return undefined;
   }
 
   writeFile(obj) {
@@ -70,7 +69,6 @@ class StateFileWatcher {
   }
 
   createWatcher() {
-    // eslint-disable-next-line no-unused-vars
     this.watcher = fs.watch(this.filename, (event, filename) => {
       this.loadFile();
     });

@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle,new-cap */
 /*
  * Copyright 2020, Ian Zieg
  *
@@ -35,7 +35,6 @@ class MidiDevice {
   }
 
   static listOutputPorts() {
-    // eslint-disable-next-line new-cap
     const output = new midi.output();
     const portCount = output.getPortCount();
     for (let i = 0; i < portCount; i += 1) {
@@ -45,7 +44,6 @@ class MidiDevice {
   }
 
   static listInputPorts() {
-    // eslint-disable-next-line new-cap
     const input = new midi.input();
     const portCount = input.getPortCount();
     for (let i = 0; i < portCount; i += 1) {
@@ -102,7 +100,6 @@ class MidiDevice {
   }
 
   openInput() {
-    // eslint-disable-next-line new-cap
     const input = new midi.input();
     let foundPort = false;
     const portCount = input.getPortCount();
@@ -125,7 +122,6 @@ class MidiDevice {
   }
 
   openOutput() {
-    // eslint-disable-next-line new-cap
     const output = new midi.output();
     const portCount = output.getPortCount();
     let foundPort = false;

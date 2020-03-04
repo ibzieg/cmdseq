@@ -45,8 +45,10 @@ class CommandBox extends React.Component {
   appendLog(text) {
     this.refs.log.insertBottom(text);
     this.refs.log.setScrollPerc(100);
+
+    // force render
     // eslint-disable-next-line react/no-unused-state
-    this.setState({ lastMessage: text }); // force render
+    this.setState({ lastMessage: text });
   }
 
   handleKeypress(ch, key) {
@@ -80,14 +82,35 @@ class CommandBox extends React.Component {
     }
   }
 
-  render() {
+  handleSubmit(value) {
     const {
-      top, left, width, height, onCommandInput, onExit,
+      onCommandInput, onExit,
     } = this.props;
     const {
       commandHistory,
     } = this.state;
     const { commandInput } = this.refs;
+
+    commandInput.clearValue();
+    commandInput.focus();
+    if (value === 'exit') {
+      onExit();
+    } else {
+      if (onCommandInput) {
+        onCommandInput(value);
+      }
+      this.setState({
+        commandHistory: [...commandHistory, value],
+        commandHistoryIndex: commandHistory.length + 1,
+      });
+    }
+  }
+
+  render() {
+    const {
+      top, left, width, height,
+    } = this.props;
+
     return React.createElement('box', {
       top,
       left,
@@ -125,29 +148,16 @@ class CommandBox extends React.Component {
           border: { fg: 'white' },
         },
         onKeypress: this.handleKeypress.bind(this),
-        onSubmit: (value) => {
-          commandInput.clearValue();
-          commandInput.focus();
-          if (value === 'exit') {
-            onExit();
-          } else {
-            if (onCommandInput) {
-              onCommandInput(value);
-            }
-            this.setState({
-              commandHistory: [...commandHistory, value],
-              commandHistoryIndex: commandHistory.length + 1,
-            });
-          }
-        },
+        onSubmit: this.handleSubmit.bind(this),
       }),
     ]);
   }
 }
 
 CommandBox.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  emitter: PropTypes.any.isRequired,
+  emitter: PropTypes.shape({
+    on: PropTypes.func,
+  }).isRequired,
   top: PropTypes.number.isRequired,
   left: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,

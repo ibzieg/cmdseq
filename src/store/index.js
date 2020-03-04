@@ -23,21 +23,19 @@ const {
 
 const logger = require('../support/logger');
 
-const log = logger.create('store');
-
 const { tracks } = require('./tracks-store');
 const { performance } = require('./performance-store');
+
+// -----------------------------------------------------------------------------
+
+const log = logger.create('store');
+
+// -----------------------------------------------------------------------------
 
 function actionLog({ getState }) {
   return (next) => (action) => {
     log.delta(`${action.type} { ${Object.keys(action.payload)} }`);
-
-    // Call the next dispatch method in the middleware chain.
-    const returnValue = next(action);
-
-    // This will likely be the action itself, unless
-    // a middleware further in chain changed it.
-    return returnValue;
+    return next(action);
   };
 }
 
@@ -48,5 +46,7 @@ const store = configureStore({
   }),
   middleware: [...getDefaultMiddleware(), actionLog],
 });
+
+// -----------------------------------------------------------------------------
 
 module.exports = store;

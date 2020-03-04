@@ -20,6 +20,8 @@ const { createSlice } = require('@reduxjs/toolkit');
 const { createSelector } = require('reselect');
 const { first } = require('lodash');
 
+// -----------------------------------------------------------------------------
+
 const tracksStore = createSlice({
   name: 'tracks',
   initialState: {},
@@ -50,12 +52,16 @@ const tracksStore = createSlice({
   },
 });
 
+// -----------------------------------------------------------------------------
+
 const selectTracks = (state) => state.tracks;
 
 const selectFirstTrack = createSelector(
   selectTracks,
   (tracksState) => tracksState[first(Object.keys(tracksState))],
 );
+
+// -----------------------------------------------------------------------------
 
 module.exports = {
   tracks: tracksStore,

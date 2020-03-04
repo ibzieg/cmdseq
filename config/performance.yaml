@@ -1,4 +1,16 @@
-# bpm: 120
+#
+#  MIDI Drum Map:
+#    36
+#    38
+#    39
+#    42
+#    46
+#    49
+#    75
+#    67
+#
+
+    # bpm: 120
 #scale: 'IIV'
 #root: G
 controller:

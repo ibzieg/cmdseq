@@ -19,6 +19,8 @@
 const { superstruct } = require('superstruct');
 const { isEmpty } = require('lodash');
 
+// -----------------------------------------------------------------------------
+
 const SceneTrack = superstruct({
   types: {
   },
