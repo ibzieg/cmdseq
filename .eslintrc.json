@@ -5,6 +5,6 @@
     ],
     "rules": {
         "import/order": ["error", { "newlines-between": "always" }],
-        "no-unused-vars": ["warn"]
+        "no-unused-vars": ["off"]
     }
 }

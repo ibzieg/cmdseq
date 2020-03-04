@@ -18,7 +18,10 @@
  */
 const { isEmpty, reverse } = require('lodash');
 
+const { GeneratorType } = require('../schema/generator-schema');
+
 const { getRandomInt, makeRandomNoteEvent } = require('./midi-data');
+
 
 // -----------------------------------------------------------------------------
 
@@ -37,15 +40,15 @@ function euclid(P, R) {
   const p = [];
   const r = [];
   let j = 0;
-  for (; j < len; j++) {
+  for (; j < len; j += 1) {
     p.push([...P[j], ...R[j]]);
   }
   if (len < P.length) {
-    for (; j < P.length; j++) {
+    for (; j < P.length; j += 1) {
       r.push(P[j]);
     }
   } else if (len < R.length) {
-    for (; j < R.length; j++) {
+    for (; j < R.length; j += 1) {
       r.push(R[j]);
     }
   }
@@ -62,69 +65,24 @@ function makeEuclidPattern(nextNote, { length, steps }) {
   }
   const r = [];
   for (i = 0; i < n - k; i += 1) {
-    r.push([null]);
+    r.push([undefined]);
   }
 
   return euclid(p, r);
 }
 
-/***
- *
- * @param nextNote
- * @param config
- * @returns {Array}
- */
-function makeQuadrantPattern(nextNote, { length, steps }) {
-  let n = length;
-  let k = steps;
-
-  let seq = [];
-
-  let i;
-  for (i = 0; i < n; i++) {
-    seq[i] = null;
-  }
-
-  let [n1, n2] = randomSplit(n);
-  let [m1, m2] = randomSplit(n1);
-  let [m3, m4] = randomSplit(n2);
-
-  let [k1, k2] = randomSplit(k);
-  let [p1, p2] = randomSplit(k1);
-  let [p3, p4] = randomSplit(k2);
-
-  assignRandomSteps(seq, 0, m1 - 1, p1, nextNote);
-  assignRandomSteps(seq, m1, m1 + m2 - 1, p2, nextNote);
-  assignRandomSteps(
-    seq,
-    m1 + m2,
-    m1 + m2 + m3 - 1,
-    p3,
-    nextNote
-  );
-  assignRandomSteps(
-    seq,
-    m1 + m2 + m3,
-    m1 + m2 + m3 + m4 - 1,
-    p4,
-    nextNote
-  );
-
-  return seq;
-}
-
-/***
+/** *
  *
  * @param n
  * @returns {*[]}
  */
 function randomSplit(n) {
-  let a = Math.random() > 0.5 ? Math.floor(n / 2) : Math.ceil(n / 2);
-  let b = n - a;
+  const a = Math.random() > 0.5 ? Math.floor(n / 2) : Math.ceil(n / 2);
+  const b = n - a;
   return [a, b];
 }
 
-/***
+/** *
  *
  * @param seq
  * @param min
@@ -133,58 +91,107 @@ function randomSplit(n) {
  * @param nextNote
  */
 function assignRandomSteps(seq, min, max, stepCount, nextNote) {
-  let i, j;
+  let i;
+  let j;
   let done = false;
-  for (i = 0; i < stepCount; i++) {
+  const nextSeq = [...seq];
+  for (i = 0; i < stepCount; i += 1) {
     while (!done) {
       j = getRandomInt(min, max);
-      if (seq[j] == null) {
-        seq[j] = nextNote();
+      if (isEmpty(nextSeq[j])) {
+        nextSeq[j] = nextNote();
         done = true;
       }
     }
   }
+  return nextSeq;
 }
 
-/***
+/** *
+ *
+ * @param nextNote
+ * @param config
+ * @returns {Array}
+ */
+function makeQuadrantPattern(nextNote, { length, steps }) {
+  const n = length;
+  const k = steps;
+
+  let seq = [];
+
+  let i;
+  for (i = 0; i < n; i += 1) {
+    seq[i] = undefined;
+  }
+
+  const [n1, n2] = randomSplit(n);
+  const [m1, m2] = randomSplit(n1);
+  const [m3, m4] = randomSplit(n2);
+
+  const [k1, k2] = randomSplit(k);
+  const [p1, p2] = randomSplit(k1);
+  const [p3, p4] = randomSplit(k2);
+
+  seq = assignRandomSteps(seq, 0, m1 - 1, p1, nextNote);
+  seq = assignRandomSteps(seq, m1, m1 + m2 - 1, p2, nextNote);
+  seq = assignRandomSteps(
+    seq,
+    m1 + m2,
+    m1 + m2 + m3 - 1,
+    p3,
+    nextNote,
+  );
+  seq = assignRandomSteps(
+    seq,
+    m1 + m2 + m3,
+    m1 + m2 + m3 + m4 - 1,
+    p4,
+    nextNote,
+  );
+
+  return seq;
+}
+
+
+/** *
  *
  * @param makeSnare
  * @param config
  * @returns {Array}
  */
 function makeQuarterPattern(nextNote, { length }) {
-  let quarter = Math.round(length / 4);
-  let seq = [];
-  for (let i = 0; i < length; i++) {
+  const quarter = Math.round(length / 4);
+  const seq = [];
+  for (let i = 0; i < length; i += 1) {
     if (i % quarter === 0) {
       seq.push(nextNote());
     } else {
-      seq.push(null);
+      seq.push(undefined);
     }
   }
 
   return seq;
 }
 
-/***
+/** *
  *
  * @param nextNote
  * @param config
  * @returns {Array}
  */
 function makeHalfPattern(nextNote, config) {
-  let length = config.length;
+  const { length } = config;
 
-  let quarter = Math.round(length / 4);
-  let half = Math.round(length / 2);
+  const quarter = Math.round(length / 4);
+  const half = Math.round(length / 2);
 
-  let seq = [];
+  const seq = [];
 
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i += 1) {
     if (i % quarter === 0 && i % half !== 0) {
       seq.push(nextNote());
     } else {
-      seq.push(null);
+      seq.push(undefined);
     }
   }
 
@@ -194,17 +201,17 @@ function makeHalfPattern(nextNote, config) {
 function makeEighthPattern(nextNote, { length }) {
   const eighth = Math.round(length / 8);
   const seq = [];
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i += 1) {
     if (i % eighth !== 0) {
       seq.push(nextNote());
     } else {
-      seq.push(null);
+      seq.push(undefined);
     }
   }
   return seq;
 }
 
-/***
+/** *
  *
  * @param nextNote
  * @param config
@@ -214,10 +221,11 @@ function makeExponentialPattern(nextNote, { length, steps }) {
   const n = length;
   const k = steps;
 
-  let seq = [];
-  let i, s;
-  for (i = 0; i < n; i++) {
-    seq[i] = null;
+  const seq = [];
+  let i; let
+    s;
+  for (i = 0; i < n; i += 1) {
+    seq[i] = undefined;
   }
 
   for (i = 0; i < n; i += s) {
@@ -239,7 +247,7 @@ function generateSequence({
   const nextNote = () => {
     const options = {};
     if (!isEmpty(notes)) {
-      options.pitch = notes[getRandomInt(0, notes.length-1)];
+      options.pitch = notes[getRandomInt(0, notes.length - 1)];
     }
     return makeRandomNoteEvent(options);
   };

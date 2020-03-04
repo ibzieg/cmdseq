@@ -25,7 +25,7 @@ const ExternalDevices = require('./external-devices');
 
 // -----------------------------------------------------------------------------
 
-const Log = logger.create('midi-device');
+const log = logger.create('midi-device');
 
 // -----------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ class MidiDevice {
     const portCount = output.getPortCount();
     for (let i = 0; i < portCount; i += 1) {
       const portName = output.getPortName(i);
-      Log.info(portName);
+      log.info(portName);
     }
   }
 
@@ -48,7 +48,7 @@ class MidiDevice {
     const portCount = input.getPortCount();
     for (let i = 0; i < portCount; i += 1) {
       const portName = input.getPortName(i);
-      Log.info(portName);
+      log.info(portName);
     }
   }
 
@@ -108,12 +108,12 @@ class MidiDevice {
       if (this.options.names.indexOf(portName) >= 0) {
         input.openPort(i);
         foundPort = true;
-        Log.confirm(`${portName}: Input port open`);
+        log.confirm(`${portName}: Input port open`);
       }
     }
 
     if (!foundPort) {
-      Log.error(
+      log.error(
         `No Input MIDI Output devices found matching ${this.options.names}`,
       );
     }
@@ -130,11 +130,11 @@ class MidiDevice {
       if (this.options.names.indexOf(portName) >= 0) {
         output.openPort(i);
         foundPort = true;
-        Log.confirm(`${portName}: Output port open`);
+        log.confirm(`${portName}: Output port open`);
       }
     }
     if (!foundPort) {
-      Log.error(`No MIDI Output devices found matching ${this.options.names}`);
+      log.error(`No MIDI Output devices found matching ${this.options.names}`);
     }
     this._outputPortStatus = foundPort;
     this._outputPort = output;
@@ -148,7 +148,7 @@ class MidiDevice {
       try {
         this.output.sendMessage([noteOnStatus, note, velocity]);
       } catch (ex) {
-        Log.error(
+        log.error(
           `Failed to send MIDI message [${noteOnStatus},${note},${velocity}]: ${ex}`,
         );
       }
@@ -156,7 +156,7 @@ class MidiDevice {
         try {
           this.output.sendMessage([noteOffStatus, note, velocity]);
         } catch (ex) {
-          Log.error(
+          log.error(
             `Failed to send MIDI message [${noteOnStatus},${note},${velocity}]: ${ex}`,
           );
         }
@@ -170,7 +170,7 @@ class MidiDevice {
       try {
         this.output.sendMessage([noteOnStatus, note, velocity]);
       } catch (ex) {
-        Log.error(
+        log.error(
           `Failed to send MIDI message [${noteOnStatus},${note},${velocity}]: ${ex}`,
         );
       }
@@ -183,7 +183,7 @@ class MidiDevice {
       try {
         this.output.sendMessage([noteOffStatus, note, velocity]);
       } catch (ex) {
-        Log.error(
+        log.error(
           `Failed to send MIDI message [${noteOffStatus},${note},${velocity}]: ${ex}`,
         );
       }
@@ -196,7 +196,7 @@ class MidiDevice {
       try {
         this.output.sendMessage([status, controlNumber, value]);
       } catch (ex) {
-        Log.error(
+        log.error(
           `Failed to send MIDI message [${status},${controlNumber},${value}]: ${ex}`,
         );
       }

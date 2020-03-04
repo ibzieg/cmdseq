@@ -109,6 +109,7 @@ class Performance {
 
       switch (cmdName) {
         case 'generate':
+          /* eslint-disable no-case-declarations */
           const seqName = first(args);
           const newSeq = generateSequence(generator);
 
@@ -122,6 +123,7 @@ class Performance {
               },
             ],
           };
+          /* eslint-enable no-case-declarations */
 
           if (this.watchers.has(trackName)) {
             const watcher = this.watchers.get(trackName);

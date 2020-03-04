@@ -25,7 +25,7 @@ const MidiDevice = require('./midi-device');
 
 // -----------------------------------------------------------------------------
 
-const Log = logger.create('midi-controller');
+const log = logger.create('midi-controller');
 
 // -----------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ class MidiController {
       this._midiDevice.input.ignoreTypes(true, false, true);
       this._midiDevice.input.on('message', this.receiveMessage.bind(this));
     } else {
-      Log.warn('MIDI Input unavailable');
+      log.warn('MIDI Input unavailable');
     }
   }
 
@@ -66,16 +66,16 @@ class MidiController {
         }
         switch (status) {
           case 144: // Note on
-            // Log.info(`Controller Note On:  ${colors.cyan(d1)} Velocity: ${colors.cyan(d2)}`);
+            // log.info(`Controller Note On:  ${colors.cyan(d1)} Velocity: ${colors.cyan(d2)}`);
             break;
           case 128: // Note off
-            // Log.info(`Controller Note Off: ${colors.gray(d1)} Velocity: ${colors.gray(d2)}`);
+            // log.info(`Controller Note Off: ${colors.gray(d1)} Velocity: ${colors.gray(d2)}`);
             break;
           case 176: // Control Change
-            // Log.info(`Controller Change: ${colors.magenta(d1)} Value: ${colors.magenta(d2)}`);
+            // log.info(`Controller Change: ${colors.magenta(d1)} Value: ${colors.magenta(d2)}`);
             break;
           default:
-            Log.info(
+            log.info(
               `Controller Message: ${colors.red(d1)},  ${colors.red(d2)}`,
             );
         }
@@ -83,21 +83,21 @@ class MidiController {
     } else {
       switch (status) {
         case 242: // Song Position Pointer
-          // Log.music(`Song Position Pointer ${d1} ${d2}`);
+          // log.music(`Song Position Pointer ${d1} ${d2}`);
           break;
         case 248: // Timing
           this.clock();
           break;
         case 250: // Start
           this.start();
-          // Log.music(`System: Start ${status}`);
+          // log.music(`System: Start ${status}`);
           break;
         case 252:
           this.stop();
-          // Log.music(`System: Stop ${status}`);
+          // log.music(`System: Stop ${status}`);
           break; // Stop
         default:
-          Log.info(`System: ${status}`);
+          log.info(`System: ${status}`);
       }
     }
   }

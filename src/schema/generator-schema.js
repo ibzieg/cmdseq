@@ -35,6 +35,8 @@ const GeneratorType = {
 
 const isGeneratorType = (value) => !isEmpty(GeneratorType[value]);
 
+// -----------------------------------------------------------------------------
+
 const GeneratorSchema = superstruct({
   types: {
     generatorType: isGeneratorType,
