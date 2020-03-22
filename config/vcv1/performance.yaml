@@ -4,12 +4,21 @@ controller:
 
 instruments:
   - name: inst1
-    device: MOTU828x
-    channel: 14
+    device: IAC1
+    channel: 1
+
+loop: rit
 
 scenes:
   - name: default
     repeat: 16
     tracks:
       - name: inst1
-        play: [A]
+        play: [A, B, A, C]
+        # play: [D, C]
+
+  - name: rit
+    repeat: 16
+    tracks:
+      - name: inst1
+        play: [acc2]

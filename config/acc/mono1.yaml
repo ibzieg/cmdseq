@@ -1,0 +1,176 @@
+name: mono1
+generator:
+  length: 32
+  steps: 7
+  type: quadrant
+  notes:
+    - 31
+    - 43
+    - 34
+    - 46
+    - 36
+    - 48
+    - 38
+    - 50
+    - 51
+    - 53
+sequences:
+  - name: A
+    rate: 4
+    steps:
+      - {pitch: 53, velocity: 39, duration: 8n, mod1: 32, mod2: 44}
+      - null
+      - null
+      - null
+      - {pitch: 43, velocity: 86, duration: 8n, mod1: 63, mod2: 14}
+      - null
+      - null
+      - null
+      - {pitch: 50, velocity: 103, duration: 8n, mod1: 78, mod2: 39}
+      - null
+      - {pitch: 43, velocity: 37, duration: 8n, mod1: 112, mod2: 46}
+      - null
+      - null
+      - null
+      - null
+      - null
+  - name: acc2
+    rate: 4
+    steps:
+      - null
+      - {pitch: 50, velocity: 89, duration: 8n, mod1: 21, mod2: 30}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 46, velocity: 33, duration: 8n, mod1: 36, mod2: 66}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 56, duration: 8n, mod1: 15, mod2: 61}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 51, velocity: 101, duration: 8n, mod1: 31, mod2: 65}
+  - name: acc3
+    rate: 4
+    steps:
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 50, velocity: 79, duration: 8n, mod1: 21, mod2: 52}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 43, velocity: 51, duration: 8n, mod1: 109, mod2: 107}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 51, velocity: 86, duration: 8n, mod1: 64, mod2: 35}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 43, velocity: 122, duration: 8n, mod1: 67, mod2: 63}
+      - null
+      - null
+      - null
+      - null
+      - null
+  - name: acc5
+    rate: 4
+    steps:
+      - null
+      - null
+      - {pitch: 31, velocity: 36, duration: 8n, mod1: 63, mod2: 80}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 113, duration: 8n, mod1: 97, mod2: 20}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 50, velocity: 27, duration: 8n, mod1: 69, mod2: 28}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 83, duration: 8n, mod1: 91, mod2: 57}
+      - null
+  - name: acc4
+    rate: 4
+    steps:
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 80, duration: 8n, mod1: 14, mod2: 108}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 99, duration: 8n, mod1: 90, mod2: 67}
+      - null
+      - null
+      - {pitch: 34, velocity: 40, duration: 8n, mod1: 36, mod2: 87}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 89, duration: 8n, mod1: 29, mod2: 25}
+      - null

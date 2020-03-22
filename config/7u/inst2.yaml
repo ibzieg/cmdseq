@@ -1,0 +1,131 @@
+name: inst2
+generator:
+  length: 16
+  steps: 4
+  type: quadrant
+  notes:
+    - 31
+    - 43
+    - 34
+    - 46
+    - 36
+    - 48
+    - 38
+    - 50
+    - 41
+    - 53
+sequences:
+  - name: B
+    rate: 4
+    steps:
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 72, duration: 8n, mod1: 102, mod2: 37}
+      - null
+      - null
+      - null
+      - {pitch: 43, velocity: 35, duration: 8n, mod1: 40, mod2: 65}
+      - {pitch: 48, velocity: 119, duration: 8n, mod1: 92, mod2: 59}
+      - null
+      - null
+      - null
+      - {pitch: 53, velocity: 75, duration: 8n, mod1: 30, mod2: 32}
+      - null
+      - null
+      - null
+  - name: C
+    rate: 4
+    steps:
+      - {pitch: 46, velocity: 106, duration: 8n, mod1: 73, mod2: 112}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 53, velocity: 80, duration: 8n, mod1: 92, mod2: 62}
+      - null
+      - {pitch: 38, velocity: 80, duration: 8n, mod1: 72, mod2: 89}
+      - null
+      - null
+      - null
+      - {pitch: 31, velocity: 61, duration: 8n, mod1: 71, mod2: 29}
+      - null
+      - null
+  - name: A
+    rate: 4
+    steps:
+      - null
+      - null
+      - null
+      - {pitch: 46, velocity: 85, duration: 8n, mod1: 55, mod2: 100}
+      - null
+      - null
+      - null
+      - {pitch: 31, velocity: 65, duration: 8n, mod1: 32, mod2: 15}
+      - null
+      - null
+      - {pitch: 53, velocity: 106, duration: 8n, mod1: 80, mod2: 32}
+      - null
+      - null
+      - {pitch: 34, velocity: 105, duration: 8n, mod1: 45, mod2: 49}
+      - null
+      - null
+  - name: D
+    rate: 4
+    steps:
+      - {pitch: 53, velocity: 108, duration: 8n, mod1: 93, mod2: 93}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 34, velocity: 42, duration: 8n, mod1: 60, mod2: 83}
+      - null
+      - {pitch: 48, velocity: 61, duration: 8n, mod1: 102, mod2: 59}
+      - null
+      - null
+      - null
+      - {pitch: 50, velocity: 114, duration: 8n, mod1: 72, mod2: 39}
+      - null
+      - null
+  - name: E
+    rate: 4
+    steps:
+      - null
+      - {pitch: 48, velocity: 71, duration: 8n, mod1: 52, mod2: 79}
+      - null
+      - null
+      - null
+      - {pitch: 46, velocity: 52, duration: 8n, mod1: 93, mod2: 63}
+      - null
+      - null
+      - null
+      - {pitch: 46, velocity: 51, duration: 8n, mod1: 94, mod2: 100}
+      - null
+      - null
+      - null
+      - {pitch: 50, velocity: 73, duration: 8n, mod1: 27, mod2: 84}
+      - null
+      - null
+  - name: F
+    rate: 4
+    steps:
+      - null
+      - {pitch: 31, velocity: 69, duration: 8n, mod1: 42, mod2: 17}
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 86, duration: 8n, mod1: 106, mod2: 99}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 85, duration: 8n, mod1: 100, mod2: 15}
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 44, duration: 8n, mod1: 98, mod2: 19}
+      - null

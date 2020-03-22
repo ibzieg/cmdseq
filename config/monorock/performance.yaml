@@ -10,9 +10,6 @@
 #    67
 #
 
-    # bpm: 120
-#scale: 'IIV'
-#root: G
 controller:
   device: IAC1
   channel: 7

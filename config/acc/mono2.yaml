@@ -1,0 +1,78 @@
+name: mono2
+generator:
+  length: 16
+  steps: 5
+  type: quadrant
+  notes:
+    - 31
+    - 43
+    - 34
+    - 46
+    - 36
+    - 48
+    - 38
+    - 50
+    - 51
+    - 53
+sequences:
+  - name: default
+    rate: 4
+    steps:
+      - null
+  - name: A
+    rate: 4
+    steps:
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 107, duration: 8n, mod1: 93, mod2: 30}
+      - null
+      - {pitch: 38, velocity: 51, duration: 8n, mod1: 95, mod2: 102}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 87, duration: 8n, mod1: 25, mod2: 107}
+      - null
+      - null
+      - {pitch: 53, velocity: 43, duration: 8n, mod1: 92, mod2: 97}
+      - null
+      - null
+      - null
+  - name: B
+    rate: 4
+    steps:
+      - {pitch: 43, velocity: 112, duration: 8n, mod1: 52, mod2: 103}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 46, velocity: 71, duration: 8n, mod1: 112, mod2: 85}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 31, velocity: 118, duration: 8n, mod1: 59, mod2: 16}
+      - null
+      - {pitch: 53, velocity: 28, duration: 8n, mod1: 109, mod2: 86}
+      - null
+      - null
+  - name: C
+    rate: 4
+    steps:
+      - null
+      - {pitch: 51, velocity: 46, duration: 8n, mod1: 88, mod2: 41}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 50, velocity: 83, duration: 8n, mod1: 104, mod2: 21}
+      - null
+      - {pitch: 53, velocity: 56, duration: 8n, mod1: 103, mod2: 73}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 51, velocity: 102, duration: 8n, mod1: 106, mod2: 43}
+      - null

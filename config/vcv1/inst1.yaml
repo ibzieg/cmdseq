@@ -1,32 +1,227 @@
 name: inst1
-
 generator:
-  length: 16
-  steps: 4
-  type: quadrant
+  length: 64
+  steps: 8
+  type: accel
   notes:
-    - 36
-    - 38
-    - 42
+    - 31
+    - 43
+    - 34
     - 46
-
+    - 36
+    - 48
+    - 38
+    - 50
+    - 51
+    - 53
 sequences:
   - name: A
     rate: 4
     steps:
-      - {pitch: 36, velocity: 123, duration: 8n, mod1: 51, mod2: 14}
+      - {pitch: 53, velocity: 39, duration: 8n, mod1: 32, mod2: 44}
       - null
       - null
       - null
-      - {pitch: 36, velocity: 127, duration: 8n, mod1: 43, mod2: 107}
+      - {pitch: 43, velocity: 86, duration: 8n, mod1: 63, mod2: 14}
       - null
       - null
       - null
-      - {pitch: 36, velocity: 50, duration: 8n, mod1: 95, mod2: 87}
+      - {pitch: 50, velocity: 103, duration: 8n, mod1: 78, mod2: 39}
+      - null
+      - {pitch: 43, velocity: 37, duration: 8n, mod1: 112, mod2: 46}
       - null
       - null
       - null
-      - {pitch: 36, velocity: 58, duration: 8n, mod1: 39, mod2: 19}
+      - null
+      - null
+  - name: B
+    rate: 4
+    steps:
+      - {pitch: 53, velocity: 60, duration: 8n, mod1: 87, mod2: 27}
       - null
       - null
       - null
+      - {pitch: 31, velocity: 50, duration: 8n, mod1: 67, mod2: 26}
+      - null
+      - null
+      - null
+      - {pitch: 31, velocity: 40, duration: 8n, mod1: 33, mod2: 19}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 115, duration: 8n, mod1: 61, mod2: 48}
+      - null
+      - null
+  - name: C
+    rate: 4
+    steps:
+      - {pitch: 34, velocity: 67, duration: 8n, mod1: 38, mod2: 43}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 114, duration: 8n, mod1: 21, mod2: 100}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 123, duration: 8n, mod1: 60, mod2: 35}
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 39, duration: 8n, mod1: 30, mod2: 94}
+      - null
+  - name: D
+    rate: 4
+    steps:
+      - {pitch: 50, velocity: 44, duration: 8n, mod1: 59, mod2: 53}
+      - null
+      - null
+      - null
+      - {pitch: 34, velocity: 123, duration: 8n, mod1: 83, mod2: 52}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 27, duration: 8n, mod1: 57, mod2: 15}
+      - null
+      - null
+      - null
+      - {pitch: 34, velocity: 125, duration: 8n, mod1: 62, mod2: 103}
+      - null
+      - null
+      - null
+  - name: acc
+    rate: 4
+    steps:
+      - {pitch: 43, velocity: 78, duration: 8n, mod1: 49, mod2: 58}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 34, velocity: 28, duration: 8n, mod1: 25, mod2: 80}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 53, velocity: 88, duration: 8n, mod1: 107, mod2: 100}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 36, velocity: 86, duration: 8n, mod1: 48, mod2: 44}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 93, duration: 8n, mod1: 69, mod2: 100}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 31, velocity: 30, duration: 8n, mod1: 78, mod2: 62}
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 107, duration: 8n, mod1: 89, mod2: 91}
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 29, duration: 8n, mod1: 64, mod2: 55}
+      - null
+      - null
+      - {pitch: 48, velocity: 125, duration: 8n, mod1: 13, mod2: 104}
+      - null
+      - {pitch: 50, velocity: 126, duration: 8n, mod1: 90, mod2: 46}
+      - null
+      - {pitch: 53, velocity: 124, duration: 8n, mod1: 78, mod2: 33}
+      - {pitch: 31, velocity: 35, duration: 8n, mod1: 48, mod2: 38}
+      - {pitch: 36, velocity: 94, duration: 8n, mod1: 78, mod2: 80}
+      - {pitch: 38, velocity: 124, duration: 8n, mod1: 52, mod2: 30}
+      - {pitch: 43, velocity: 46, duration: 8n, mod1: 112, mod2: 85}
+  - name: acc2
+    rate: 4
+    steps:
+      - {pitch: 34, velocity: 127, duration: 8n, mod1: 55, mod2: 30}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 124, duration: 8n, mod1: 81, mod2: 53}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 34, velocity: 120, duration: 8n, mod1: 16, mod2: 103}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 31, velocity: 116, duration: 8n, mod1: 27, mod2: 30}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 112, duration: 8n, mod1: 61, mod2: 73}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 43, velocity: 108, duration: 8n, mod1: 90, mod2: 64}
+      - null
+      - null
+      - null
+      - {pitch: 41, velocity: 104, duration: 8n, mod1: 26, mod2: 48}
+      - null
+      - null
+      - null
+      - {pitch: 48, velocity: 100, duration: 8n, mod1: 60, mod2: 40}
+      - null
+      - null
+      - {pitch: 43, velocity: 96, duration: 8n, mod1: 105, mod2: 88}
+      - null
+      - null
+      - {pitch: 48, velocity: 92, duration: 8n, mod1: 52, mod2: 86}
+      - null
+      - null
+      - {pitch: 46, velocity: 88, duration: 8n, mod1: 89, mod2: 32}
+      - null
+      - {pitch: 43, velocity: 84, duration: 8n, mod1: 71, mod2: 22}
+      - null
+      - {pitch: 53, velocity: 80, duration: 8n, mod1: 75, mod2: 14}
+      - null
+      - {pitch: 43, velocity: 76, duration: 8n, mod1: 89, mod2: 41}
+      - {pitch: 48, velocity: 72, duration: 8n, mod1: 48, mod2: 60}
+      - {pitch: 50, velocity: 68, duration: 8n, mod1: 34, mod2: 12}
+      - {pitch: 46, velocity: 64, duration: 8n, mod1: 83, mod2: 42}
+      - {pitch: 34, velocity: 60, duration: 8n, mod1: 85, mod2: 56}
+      - {pitch: 50, velocity: 56, duration: 8n, mod1: 70, mod2: 77}
+      - {pitch: 34, velocity: 52, duration: 8n, mod1: 32, mod2: 67}
+      - {pitch: 38, velocity: 48, duration: 8n, mod1: 17, mod2: 102}

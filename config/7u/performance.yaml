@@ -1,0 +1,41 @@
+controller:
+  device: IAC1
+  channel: 7
+
+instruments:
+  - name: inst1
+    device: Midisport
+    channel: 11
+  - name: inst2
+    device: Midisport
+    channel: 12
+
+loop: 8AM
+
+scenes:
+  - name: default
+    repeat: 16
+    tracks:
+      - name: inst1
+        play: [A, B, A, C]
+      - name: inst2
+        play: [A, B, A, C]
+
+  - name: 7AM
+    repeat: 16
+    tracks:
+      - name: inst1
+        play: [D, E, D, F]
+      - name: inst2
+        play: [A, B, A, C]
+
+  - name: 8AM
+    repeat: 16
+    tracks:
+
+      - name: inst1
+        play: [D, E, A, B, D, F, A, C]
+        follow: inst2
+
+      - name: inst2
+        play: [D, E, A, B, D, F, A, C]

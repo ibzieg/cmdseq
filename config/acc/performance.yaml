@@ -1,0 +1,29 @@
+controller:
+  device: IAC1
+  channel: 7
+
+instruments:
+  - name: mono1
+    device: MOTU828x
+    channel: 1
+  - name: mono2
+    device: MOTU828x
+    channel: 2
+
+  - name: drum1
+    device: MOTU828x
+    channel: 14
+
+scenes:
+  - name: acc
+    repeat: 16
+    tracks:
+      - name: mono1
+        play: [acc2, acc4, acc3, acc5]
+
+      - name: mono2
+        follow: mono1
+        play: [A, B, A, C]
+
+      - name: drum1
+        play: [B, A, C, A]
