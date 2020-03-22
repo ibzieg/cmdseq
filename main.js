@@ -32,36 +32,38 @@ const log = logger.create('main');
 
 (function main() {
   program.requiredOption('-p, --performance <filename>', 'Performance Yaml File');
+  program.requiredOption('-n, --no-gui', 'Disable GUI');
   program.parse(process.argv);
 
-  const perfOpts = {
+  const perf = new Performance({
     filename: program.performance,
-  };
-
-  const perf = new Performance(perfOpts);
-
-  Screen.create({
-    onExit: () => {
-      log.info('Exiting');
-      process.exit(0);
-    },
-    onCommandInput: (text) => {
-      log.command(`${text}`);
-      try {
-        const wasHandled = perf.handleCommandInput(text);
-        if (!wasHandled) {
-          // eslint-disable-next-line no-eval
-          const result = eval(text);
-          log.info(`> ${result}`);
-        }
-      } catch (error) {
-        log.error(error);
-      }
-    },
-    onFunctionKey: (event) => {
-      log.debug(`Function key pressed: ${event}`);
-    },
   });
+
+  const showGui = program.gui;
+
+  if (showGui) {
+    Screen.create({
+      onExit: () => {
+        log.info('Exiting');
+        process.exit(0);
+      },
+      onCommandInput: (text) => {
+        log.command(`${text}`);
+        try {
+          const wasHandled = perf.handleCommandInput(text);
+          if (!wasHandled) {
+            const result = eval(text); // eslint-disable-line no-eval
+            log.info(`> ${result}`);
+          }
+        } catch (error) {
+          log.error(error);
+        }
+      },
+      onFunctionKey: (event) => {
+        log.debug(`Function key pressed: ${event}`);
+      },
+    });
+  }
 
   try {
     log.info(`${app.name} ${app.version}`);

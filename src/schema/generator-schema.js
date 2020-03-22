@@ -58,5 +58,6 @@ const isValidGenerator = (value) => {
 
 module.exports = {
   GeneratorSchema,
+  GeneratorType,
   isValidGenerator,
 };

@@ -65,7 +65,7 @@ function makeEuclidPattern(nextNote, { length, steps }) {
   }
   const r = [];
   for (i = 0; i < n - k; i += 1) {
-    r.push([undefined]);
+    r.push([null]);
   }
 
   return euclid(p, r);
@@ -121,7 +121,7 @@ function makeQuadrantPattern(nextNote, { length, steps }) {
 
   let i;
   for (i = 0; i < n; i += 1) {
-    seq[i] = undefined;
+    seq[i] = null;
   }
 
   const [n1, n2] = randomSplit(n);
@@ -166,7 +166,7 @@ function makeQuarterPattern(nextNote, { length }) {
     if (i % quarter === 0) {
       seq.push(nextNote());
     } else {
-      seq.push(undefined);
+      seq.push(null);
     }
   }
 
@@ -191,7 +191,7 @@ function makeHalfPattern(nextNote, config) {
     if (i % quarter === 0 && i % half !== 0) {
       seq.push(nextNote());
     } else {
-      seq.push(undefined);
+      seq.push(null);
     }
   }
 
@@ -205,7 +205,7 @@ function makeEighthPattern(nextNote, { length }) {
     if (i % eighth !== 0) {
       seq.push(nextNote());
     } else {
-      seq.push(undefined);
+      seq.push(null);
     }
   }
   return seq;
@@ -225,7 +225,7 @@ function makeExponentialPattern(nextNote, { length, steps }) {
   let i; let
     s;
   for (i = 0; i < n; i += 1) {
-    seq[i] = undefined;
+    seq[i] = null;
   }
 
   for (i = 0; i < n; i += s) {

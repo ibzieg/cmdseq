@@ -119,6 +119,7 @@ class Performance {
               ...track.sequences.filter((s) => s.name !== seqName),
               {
                 name: seqName,
+                rate: 4, // TODO Move Constant
                 steps: newSeq,
               },
             ],

@@ -74,7 +74,7 @@ function PerformanceController({
 }
 
 PerformanceController.propTypes = {
-  log: PropTypes.shape({}).isRequired,
+  log: PropTypes.any.isRequired,
   emitter: PropTypes.shape({}).isRequired,
   onCommandInput: PropTypes.func.isRequired,
   onExit: PropTypes.func.isRequired,

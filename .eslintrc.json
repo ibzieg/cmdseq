@@ -5,6 +5,7 @@
     ],
     "rules": {
         "import/order": ["error", { "newlines-between": "always" }],
-        "no-unused-vars": ["off"]
+        "no-unused-vars": ["off"],
+        "react/forbid-prop-types": ["off"]
     }
 }
