@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const MidiInstrument = require('../midi/midi-instrument');
-const ExternalDevices = require('../midi/external-devices');
 
 const logger = require('./logger');
 
@@ -60,8 +58,7 @@ class SequencePlayer {
   }
 
 
-  clock(clockCount, instrumentOptions, sequence, shouldLoop = true) {
-    const { device, channel } = instrumentOptions;
+  clock(clockCount, instrument, sequence, shouldLoop = true) {
     const { steps, rate } = sequence;
 
     const clockMod = Math.floor(PARTS_PER_QUANT / rate);
@@ -75,11 +72,6 @@ class SequencePlayer {
         const { length } = steps;
         const stepIndex = stepCount % length;
         const stepEvent = steps[stepIndex];
-
-        const instrument = new MidiInstrument({
-          channel,
-          device: ExternalDevices.devices[device],
-        });
 
         eventDidExecute = runStepEvent(stepEvent, instrument);
 

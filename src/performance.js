@@ -35,7 +35,7 @@ const {
 } = require('./store/performance-store');
 const StateFileWatcher = require('./support/state-file-watcher');
 const { TrackSchema } = require('./schema/track-schema');
-const { MidiController, MidiDevice } = require('./midi');
+const { MidiController, MidiDevice, MidiInstrument } = require('./midi');
 const { generateSequence } = require('./support/generator');
 const SequencePlayer = require('./support/sequence-player');
 const { PerformanceSchema } = require('./schema/performance-schema');
@@ -100,6 +100,7 @@ class Performance {
   handleCommandInput(commandText = '') {
     const state = store.getState();
     const tracks = selectTracks(state);
+    const instruments = selectInstruments(state);
 
     const [trackName, cmdName, ...args] = commandText.split(' ');
 
@@ -107,9 +108,9 @@ class Performance {
     if (track) {
       const { generator } = track;
 
+      /* eslint-disable no-case-declarations */
       switch (cmdName) {
         case 'generate':
-          /* eslint-disable no-case-declarations */
           const seqName = first(args);
           const newSeq = generateSequence(generator);
 
@@ -124,7 +125,6 @@ class Performance {
               },
             ],
           };
-          /* eslint-enable no-case-declarations */
 
           if (this.watchers.has(trackName)) {
             const watcher = this.watchers.get(trackName);
@@ -132,9 +132,18 @@ class Performance {
           }
 
           return true;
+
+        case 'play':
+          const [pitch, velocity, duration] = args;
+          const instrumentOpts = instruments.find((inst) => inst.name === trackName);
+          const instrument = new MidiInstrument(instrumentOpts);
+          instrument.play(pitch, velocity || 120);
+          return true;
+
         default:
           return false;
       }
+      /* eslint-enable no-case-declarations */
     }
     return false;
   }
@@ -225,8 +234,8 @@ class Performance {
       let eventDidExecute = false;
 
       const player = this.players.get(name);
-      const instrument = instruments.find((inst) => inst.name === name);
-      if (instrument && player && !isEmpty(play)) {
+      const instrumentOpts = instruments.find((inst) => inst.name === name);
+      if (instrumentOpts && player && !isEmpty(play)) {
         const seqNameIndex = player.loopCount;
         const seqName = play[seqNameIndex % play.length];
         const sequence = sequences.find((s) => s.name === seqName);
@@ -237,6 +246,7 @@ class Performance {
         }
 
         // Send Clock event to player
+        const instrument = new MidiInstrument(instrumentOpts);
         eventDidExecute = player.clock(this.clockCount, instrument, sequence, shouldLoop);
       }
 

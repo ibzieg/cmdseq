@@ -19,6 +19,7 @@
 const logger = require('../support/logger');
 
 const MidiDevice = require('./midi-device');
+const ExternalDevices = require('./external-devices');
 
 // -----------------------------------------------------------------------------
 
@@ -35,9 +36,12 @@ class MidiInstrument {
     return this.midiDevice.outputStatus;
   }
 
-  constructor(options) {
-    this.options = options;
-    this.midiDevice = MidiDevice.getInstance(options.device);
+  constructor({ channel, device }) {
+    this.options = {
+      channel,
+    };
+    const deviceConfig = ExternalDevices.devices[device];
+    this.midiDevice = MidiDevice.getInstance(deviceConfig);
   }
 
   play(note, velocity, duration) {
