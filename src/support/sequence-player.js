@@ -27,14 +27,28 @@ const log = logger.create('player');
 
 // -----------------------------------------------------------------------------
 
-function runStepEvent(stepEvent, midiInstrument) {
-  if (stepEvent && midiInstrument) {
-    const {
-      pitch, velocity, duration, mod1, mod2,
-    } = stepEvent;
-    midiInstrument.play(pitch, velocity, 100);
+function runStepEvent({
+  cc1,
+  cc2,
+  instrument,
+  mod1,
+  mod2,
+  stepEvent,
+}) {
+  if (stepEvent && instrument) {
+    const { pitch, velocity } = stepEvent;
+    instrument.play(pitch, velocity, 100);
+
+    if (mod1 && stepEvent.mod1) {
+      mod1.controlChange(cc1, stepEvent.mod1);
+    }
+
+    if (mod2 && stepEvent.mod2) {
+      mod2.controlChange(cc2, stepEvent.mod2);
+    }
     return true;
   }
+
   return false;
 }
 
@@ -46,22 +60,32 @@ class SequencePlayer {
   }
 
   reset() {
-    this.stepCount = 0;
     this.loopCount = 0;
     this.startCount = 0;
+    this.stepCount = 0;
   }
 
   next() {
     this.loopCount += 1;
-    this.stepCount = 0;
     this.startCount = 0;
+    this.stepCount = 0;
   }
 
 
-  clock(clockCount, instrument, sequence, shouldLoop = true) {
+  clock({
+    cc1,
+    cc2,
+    clockCount,
+    instrument,
+    mod1,
+    mod2,
+    ppq,
+    sequence,
+    shouldLoop,
+  }) {
     const { steps, rate } = sequence;
 
-    const clockMod = Math.floor(PARTS_PER_QUANT / rate);
+    const clockMod = Math.floor(ppq / rate);
 
     let eventDidExecute = false;
 
@@ -73,7 +97,14 @@ class SequencePlayer {
         const stepIndex = stepCount % length;
         const stepEvent = steps[stepIndex];
 
-        eventDidExecute = runStepEvent(stepEvent, instrument);
+        eventDidExecute = runStepEvent({
+          cc1,
+          cc2,
+          instrument,
+          mod1,
+          mod2,
+          stepEvent,
+        });
 
         this.stepCount = (stepCount + 1) % length;
         if (this.stepCount === 0) {

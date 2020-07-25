@@ -34,8 +34,7 @@ scenes:
     tracks:
 
       - name: inst1
-        play: [D, E, A, B, D, F, A, C]
-        follow: inst2
+        play: [A, B, A, C]
 
       - name: inst2
         play: [D, E, A, B, D, F, A, C]

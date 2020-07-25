@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-const { dirname } = require('path');
+const { dirname, resolve } = require('path');
 
-const { first, isEmpty } = require('lodash');
+const { first, get, isEmpty } = require('lodash');
 
 const store = require('./store');
 const {
@@ -55,7 +55,7 @@ class Performance {
 
   get filename() {
     const { filename } = this.options;
-    return filename;
+    return resolve(filename);
   }
 
   constructor(options) {
@@ -206,6 +206,7 @@ class Performance {
 
   midiClock() {
     const state = store.getState();
+    const controller = selectController(state);
     const loopScene = selectLoop(state);
     const scenes = selectScenes(state);
     const instruments = selectInstruments(state);
@@ -221,6 +222,16 @@ class Performance {
 
     const { repeat } = scene;
     let readyNextScene = false;
+
+    const masterTrack = scene.tracks.find((t) => t.master);
+    let { ppq } = controller;
+    if (masterTrack) {
+      const masterPlayer = this.players.get(masterTrack.name);
+      if (masterPlayer && !isEmpty(scene.ppq)) {
+        const ppqIndex = masterPlayer.startCount % scene.ppq.length;
+        ppq = scene.ppq[ppqIndex];
+      }
+    }
 
     const playTrack = (sceneTrack, launchNext = false) => {
       const {
@@ -238,7 +249,7 @@ class Performance {
       if (instrumentOpts && player && !isEmpty(play)) {
         const seqNameIndex = player.loopCount;
         const seqName = play[seqNameIndex % play.length];
-        const sequence = sequences.find((s) => s.name === seqName);
+        const sequence = sequences.find((s) => s.name === seqName) || { rate: 1, steps: [null, null, null, null] };
 
         const shouldLoop = isEmpty(follow);
         if (launchNext) {
@@ -247,7 +258,23 @@ class Performance {
 
         // Send Clock event to player
         const instrument = new MidiInstrument(instrumentOpts);
-        eventDidExecute = player.clock(this.clockCount, instrument, sequence, shouldLoop);
+        const mod1 = instrumentOpts.mod1
+          ? new MidiInstrument(instrumentOpts.mod1)
+          : undefined;
+        const mod2 = instrumentOpts.mod2
+          ? new MidiInstrument(instrumentOpts.mod2)
+          : undefined;
+        eventDidExecute = player.clock({
+          cc1: get(instrumentOpts, 'mod1.cc', undefined),
+          cc2: get(instrumentOpts, 'mod2.cc', undefined),
+          clockCount: this.clockCount,
+          instrument,
+          mod1,
+          mod2,
+          ppq,
+          sequence,
+          shouldLoop,
+        });
       }
 
       // Play any tracks that are following this one
@@ -258,6 +285,8 @@ class Performance {
       });
 
       if (master && player) {
+        // TODO Use master startCount to index a PPQ list
+        // If there is no ppQ list, use the default from the Controller
         if (player.startCount >= repeat) {
           readyNextScene = true;
         }

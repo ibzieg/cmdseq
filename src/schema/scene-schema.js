@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const { superstruct } = require('superstruct');
-const { isEmpty } = require('lodash');
+const { isEmpty, isArray } = require('lodash');
 
 // -----------------------------------------------------------------------------
 
@@ -41,10 +41,12 @@ const isSceneTrack = (value) => {
 const SceneSchema = superstruct({
   types: {
     sceneTrack: isSceneTrack,
+    ppqSequence: isArray,
   },
 })({
   name: 'string',
   repeat: 'number',
+  ppq: 'ppqSequence?',
   tracks: ['sceneTrack'],
 });
 

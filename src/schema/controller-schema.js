@@ -30,6 +30,7 @@ const ControllerSchema = superstruct({
 })({
   device: 'string',
   channel: 'midiChannel',
+  ppq: 'number',
 });
 
 const isValidController = (value) => {

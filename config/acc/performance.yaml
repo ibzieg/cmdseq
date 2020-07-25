@@ -1,11 +1,13 @@
 controller:
   device: IAC1
   channel: 7
+  ppq: 48
 
 instruments:
   - name: mono1
     device: MOTU828x
     channel: 1
+
   - name: mono2
     device: MOTU828x
     channel: 2
@@ -13,12 +15,34 @@ instruments:
   - name: drum1
     device: MOTU828x
     channel: 14
+    mod1:
+      device: IAC1
+      channel: 3
+      cc: 40
+    mod2:
+      device: IAC1
+      channel: 3
+      cc: 41
+
+  - name: snare
+    device: MOTU828x
+    channel: 14
+    mod1:
+      device: IAC1
+      channel: 3
+      cc: 42
+    mod2:
+      device: IAC1
+      channel: 3
+      cc: 43
 
 scenes:
   - name: acc
     repeat: 16
+    ppq: [48]
     tracks:
       - name: mono1
+        follow: drum1
         play: [acc2, acc4, acc3, acc5]
 
       - name: mono2
@@ -27,3 +51,7 @@ scenes:
 
       - name: drum1
         play: [B, A, C, A]
+
+      - name: snare
+        follow: drum1
+        play: [A, C, A, B]

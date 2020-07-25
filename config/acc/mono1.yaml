@@ -16,7 +16,7 @@ generator:
     - 53
 sequences:
   - name: A
-    rate: 4
+    rate: 8
     steps:
       - {pitch: 53, velocity: 39, duration: 8n, mod1: 32, mod2: 44}
       - null
@@ -35,7 +35,7 @@ sequences:
       - null
       - null
   - name: acc2
-    rate: 4
+    rate: 8
     steps:
       - null
       - {pitch: 50, velocity: 89, duration: 8n, mod1: 21, mod2: 30}
@@ -70,7 +70,7 @@ sequences:
       - null
       - {pitch: 51, velocity: 101, duration: 8n, mod1: 31, mod2: 65}
   - name: acc3
-    rate: 4
+    rate: 8
     steps:
       - null
       - null
@@ -140,7 +140,7 @@ sequences:
       - {pitch: 48, velocity: 83, duration: 8n, mod1: 91, mod2: 57}
       - null
   - name: acc4
-    rate: 4
+    rate: 8
     steps:
       - null
       - null

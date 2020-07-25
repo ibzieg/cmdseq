@@ -23,18 +23,37 @@ const { isMidiNumber, isMidiChannel } = require('./note-event-schema');
 
 // -----------------------------------------------------------------------------
 
+const ModulationSchema = superstruct({
+  types: {
+    midiNumber: isMidiNumber,
+    midiChannel: isMidiChannel,
+  },
+})({
+  device: 'string',
+  channel: 'midiChannel',
+  cc: 'midiNumber',
+});
+
+const isValidModulation = (value) => {
+  const [error] = ModulationSchema.validate(value);
+  return isEmpty(error);
+};
+
+// -----------------------------------------------------------------------------
+
 const InstrumentSchema = superstruct({
   types: {
     midiNumber: isMidiNumber,
     midiChannel: isMidiChannel,
+    modulation: isValidModulation,
   },
 })({
   name: 'string',
   device: 'string',
   channel: 'midiChannel',
   quantize: 'boolean?',
-  cc1: 'midiNumber?',
-  cc2: 'midiNumber?',
+  mod1: 'modulation?',
+  mod2: 'modulation?',
 });
 
 const isValidInstrument = (value) => {

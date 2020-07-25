@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 const fs = require('fs');
+const { basename } = require('path');
 
 const { safeLoad, safeDump } = require('js-yaml');
 
@@ -62,7 +63,7 @@ class StateFileWatcher {
     this.filename = filename;
     this.schema = schema;
     this.onLoad = onLoad;
-    this.log = logger.create(filename);
+    this.log = logger.create(`watch:${basename(filename)}`);
     this.createWatcher();
     this.log.info(`Watching ${filename}`);
     this.loadFile();

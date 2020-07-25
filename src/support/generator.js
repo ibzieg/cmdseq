@@ -265,7 +265,7 @@ function generateSequence({
       return makeExponentialPattern(nextNote, { length, steps });
     case GeneratorType.ritard:
       return reverse(makeExponentialPattern(nextNote, { length, steps }));
-    case GeneratorType.eculid:
+    case GeneratorType.euclid:
     default: return makeEuclidPattern(nextNote, { length, steps });
   }
 }

@@ -123,7 +123,7 @@ class CommandBox extends React.Component {
     [
       React.createElement('box', {
         border: { type: 'line' },
-        height: height - 3,
+        height: '90%',
         key: 'log-box',
         left: 0,
         ref: 'log',
@@ -144,7 +144,7 @@ class CommandBox extends React.Component {
         mouse: true,
         ref: 'commandInput',
         scrollable: true,
-        top: height - 4,
+        top: '89%',
         width,
         style: {
           border: { fg: 'white' },

@@ -44,6 +44,16 @@ class MidiInstrument {
     this.midiDevice = MidiDevice.getInstance(deviceConfig);
   }
 
+  controlChange(controlNumber, value) {
+    const status = 176 + this.channel - 1;
+    if (controlNumber > 0
+      && controlNumber < 128
+      && value > 0
+      && value < 128) {
+      this.midiDevice.output.sendMessage([status, controlNumber, value]);
+    }
+  }
+
   play(note, velocity, duration) {
     const noteOnStatus = 144 + this.channel - 1;
     const noteOffStatus = 128 + this.channel - 1;

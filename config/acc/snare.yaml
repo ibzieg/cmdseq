@@ -1,0 +1,103 @@
+name: snare
+generator:
+  length: 16
+  steps: 4
+  type: quadrant
+  notes:
+    - 38
+sequences:
+  - name: half
+    rate: 4
+    steps:
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 98, duration: 8n, mod1: 29, mod2: 43}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 126, duration: 8n, mod1: 99, mod2: 32}
+      - null
+      - null
+      - null
+  - name: myTest
+    rate: 4
+    steps:
+      - {pitch: 38, velocity: 49, duration: 8n, mod1: 89, mod2: 108}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 86, duration: 8n, mod1: 59, mod2: 16}
+      - null
+      - null
+      - {pitch: 38, velocity: 26, duration: 8n, mod1: 105, mod2: 14}
+      - null
+      - null
+      - {pitch: 38, velocity: 92, duration: 8n, mod1: 46, mod2: 109}
+      - null
+      - null
+      - null
+  - name: A
+    rate: 4
+    steps:
+      - {pitch: 38, velocity: 31, duration: 8n, mod1: 57, mod2: 33}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 45, duration: 8n, mod1: 91, mod2: 12}
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 44, duration: 8n, mod1: 74, mod2: 17}
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 85, duration: 8n, mod1: 79, mod2: 109}
+  - name: B
+    rate: 4
+    steps:
+      - null
+      - null
+      - {pitch: 38, velocity: 92, duration: 8n, mod1: 39, mod2: 99}
+      - null
+      - null
+      - {pitch: 38, velocity: 40, duration: 8n, mod1: 55, mod2: 102}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 77, duration: 8n, mod1: 18, mod2: 48}
+      - null
+      - null
+      - {pitch: 38, velocity: 117, duration: 8n, mod1: 74, mod2: 56}
+      - null
+  - name: C
+    rate: 4
+    steps:
+      - {pitch: 38, velocity: 82, duration: 8n, mod1: 111, mod2: 89}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 97, duration: 8n, mod1: 95, mod2: 58}
+      - null
+      - null
+      - {pitch: 38, velocity: 60, duration: 8n, mod1: 98, mod2: 94}
+      - null
+      - null
+      - null
+      - null
+      - null
+      - {pitch: 38, velocity: 120, duration: 8n, mod1: 68, mod2: 33}

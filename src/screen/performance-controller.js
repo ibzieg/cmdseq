@@ -43,7 +43,7 @@ function PerformanceController({
       {
         top: 0,
         left: 0,
-        width: SCREEN_WIDTH - 2,
+        width: '100%',
         height: 3,
         border: {
           type: 'line',
@@ -61,8 +61,8 @@ function PerformanceController({
       {
         top: 3,
         left: 0,
-        height: 32,
-        width: SCREEN_WIDTH - 2,
+        height: '95%',
+        width: '100%',
         log,
         emitter,
         onCommandInput,
